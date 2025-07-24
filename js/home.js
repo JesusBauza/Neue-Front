@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const projectsGrid = document.getElementById("projects-grid");
-  const apiUrl = "http://localhost:1337/api/proyectos?populate=*";
+  const apiUrl =
+    "http://neue-backend-production.up.railway.app/api/proyectos?populate=*";
 
   try {
     const response = await fetch(apiUrl);
