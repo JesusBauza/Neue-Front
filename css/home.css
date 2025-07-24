@@ -1,0 +1,123 @@
+.projects-container {
+  padding: 40px 20px; /* Espaciado interior */
+  margin: 0 auto;
+}
+
+/* Estilos para la primera, tercera, quinta, etc., sección */
+/* .articles-1 {
+  display: flex;
+  justify-content: space-between;
+  height: 51.54rem;
+  margin-top: 8.06rem;
+}
+
+
+.articles-1 .project-card:nth-child(1) {
+  align-self: flex-start;
+}
+
+.articles-1 .project-card:nth-child(2) {
+  align-self: center;
+}
+
+.articles-1 .project-card:nth-child(3) {
+  align-self: flex-end;
+}
+
+
+.articles-2 {
+  display: flex;
+  justify-content: space-between;
+  height: 45.56rem;
+  margin-top: 8.06rem;
+}
+
+.articles-2 .project-card:nth-child(1) {
+  align-self: center;
+}
+
+.articles-2 .project-card:nth-child(2) {
+  align-self: flex-start;
+}
+
+.articles-2 .project-card:nth-child(3) {
+  align-self: flex-end;
+}
+ */
+
+/* Estilos para la primera, tercera, quinta, etc., sección */
+.articles-1 {
+  display: grid;
+  grid-template-columns: repeat(3, 296px);
+  align-items: start;
+  margin-top: 8.06rem;
+  justify-items: left;
+  justify-content: space-between;
+}
+
+/* Estilos para la segunda, cuarta, sexta, etc., sección */
+.articles-2 {
+  display: grid;
+  grid-template-columns: repeat(3, 296px);
+  align-items: start;
+  justify-items: left;
+  justify-content: space-between;
+  margin-top: 8.06rem;
+}
+
+/* --- Posicionamiento de las tarjetas --- */
+
+.articles-1 .project-card:nth-child(1) {
+  /* No necesita alineación especial (arriba) */
+}
+.articles-1 .project-card:nth-child(2) {
+  margin-top: 10rem; /* Empuja la segunda tarjeta hacia abajo */
+}
+.articles-1 .project-card:nth-child(3) {
+  margin-top: 20rem; /* Empuja la tercera tarjeta más abajo */
+}
+
+.articles-2 .project-card:nth-child(1) {
+  grid-column: 2;
+}
+.articles-2 .project-card:nth-child(2) {
+  margin-top: 10rem;
+  grid-column: 1;
+  grid-row: 1;
+}
+.articles-2 .project-card:nth-child(3) {
+  margin-top: 20rem;
+  grid-column: 3;
+}
+
+.project-card {
+  width: auto;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card img {
+  height: 23.5625rem;
+  align-self: stretch;
+  aspect-ratio: 296/377;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.project-card-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.875rem; /* 116.667% */
+  letter-spacing: -0.015rem;
+  text-transform: uppercase;
+}
+
+/* --- Media Query para pantallas más pequeñas (móviles) --- */
+@media (max-width: 768px) {
+  .projects-container {
+    column-count: 1; /* En móviles, mostramos una sola columna */
+  }
+}

@@ -1,0 +1,38 @@
+footer {
+  color: #000;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.75rem; /* 100% */
+}
+
+.f_wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.f_l {
+  display: flex;
+  flex-direction: column;
+}
+
+.f_l a {
+  color: #000;
+}
+
+.f_r {
+  width: 14.625rem;
+}
+
+@media (max-width: 700px) {
+  footer {
+    font-size: 0.875rem;
+  }
+
+  .f_wrapper {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+}

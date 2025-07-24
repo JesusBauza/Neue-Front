@@ -1,0 +1,341 @@
+/* /* Estilos generales para el contenedor del proyecto */
+/* .project-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+} */
+
+body {
+  padding: 1.5rem 1.25rem 1.13rem 1.25rem;
+}
+
+.wrapper_header {
+  display: flex;
+  justify-content: left;
+  margin-top: 23.25rem;
+  margin-bottom: 4rem;
+  align-items: flex-end;
+  align-content: flex-end;
+  gap: 0rem 8.9375rem;
+}
+
+.wrapper_meta {
+  width: auto;
+  display: flex;
+  justify-content: left;
+  align-items: end;
+  gap: 7rem;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.25rem; /* 125% */
+  text-transform: uppercase;
+}
+
+#project-title {
+  width: 42.875rem;
+  height: 13.75rem;
+  flex-shrink: 0;
+  font-size: 7.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 7.375rem; /* 98.333% */
+  letter-spacing: -0.15rem;
+  text-transform: uppercase;
+  white-space: pre-line;
+}
+
+#project-cover {
+  height: 32.5rem;
+  align-self: stretch;
+}
+
+.services-list {
+  list-style-type: none; /* Quita los puntos de la lista */
+  margin: 0;
+  padding: 0;
+  display: inline-block; /* Hace que la lista se comporte como un bloque pero en línea */
+  vertical-align: middle; /* Ayuda a alinear la lista con el texto del año */
+}
+
+.cover-image {
+  width: 100%;
+  height: auto;
+}
+
+.info-proyecto {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+}
+
+.info-proyecto span {
+  font-size: 1.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.625rem; /* 86.667% */
+  text-transform: uppercase;
+}
+
+#project-info {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  width: 43.12rem;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5rem; /* 120% */
+}
+
+.collaborators-section {
+  margin-top: 15rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 11.25rem;
+  gap: 3.81rem;
+}
+
+.wrapper_creditos {
+  display: flex;
+  flex-direction: column;
+  width: 43.12rem;
+}
+
+#project-collaborators {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+/* Estilos para colaboradores */
+.collaborator {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.collaborators-section h2 {
+  font-size: 1.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.625rem; /* 86.667% */
+  text-transform: uppercase;
+}
+.collaborator-name {
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.collaborator-profession {
+  color: #a6a6a6;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* === La Magia del Grid de la Galería === */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Crea un grid de 2 columnas */
+  gap: 15px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen llene el espacio sin deformarse */
+}
+
+/* Selecciona la 1ra, 4ta, 7ma... imagen (cada 3 imágenes, empezando por la primera)
+  y haz que ocupe las 2 columnas del grid.
+*/
+.gallery-grid img:nth-child(3n + 1) {
+  grid-column: 1 / -1; /* Ocupa desde la línea 1 hasta la última (-1) */
+}
+
+/* Estilos para la sección de Trabajos Relacionados */
+.related-works-section {
+  margin-top: 13.19rem; /* Espacio superior */
+  margin-bottom: 14rem;
+}
+
+.related-works-section h2 {
+  font-size: 7.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 7.625rem; /* 101.667% */
+  letter-spacing: -0.15rem;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+}
+
+.related-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.related-card {
+  text-decoration: none;
+  color: inherit;
+}
+
+.related-card img {
+  width: auto;
+  height: 16.4375rem;
+  aspect-ratio: 453/263;
+  object-fit: cover;
+  margin-bottom: 0;
+}
+
+.related-card-info {
+  display: flex;
+  justify-content: space-between; /* Pone el título a la izquierda y la categoría a la derecha */
+  font-weight: bold;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.75rem; /* 175% */
+  letter-spacing: -0.02rem;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1150px) {
+  .wrapper_header {
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 2rem;
+  }
+
+  #project-meta {
+    width: 100%;
+  }
+
+  .wrapper_meta {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 0;
+  }
+
+  .info-proyecto {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 850px) {
+  .collaborators-section {
+    justify-content: left;
+  }
+
+  .wrapper_creditos {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+
+  .collaborator {
+    align-self: baseline;
+  }
+  .related-grid {
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .related-card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 453/263;
+    object-fit: cover;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 650px) {
+  #project-title {
+    width: auto;
+    height: auto;
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2.875rem; /* 95.833% */
+    letter-spacing: -0.06rem;
+    text-transform: uppercase;
+    text-transform: uppercase;
+    white-space: pre-line;
+  }
+  .wrapper_header {
+    margin-top: 10.06rem;
+    margin-bottom: 1.25rem;
+    gap: 3.25rem;
+  }
+
+  .wrapper_meta {
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 0.875rem; /* 116.667% */
+    text-transform: uppercase;
+  }
+
+  .cover-image {
+    width: 100%;
+    height: 21rem;
+  }
+
+  .info-proyecto {
+    margin-top: 5rem;
+  }
+  #project-info {
+    gap: 4rem;
+    width: 100%;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.125rem; /* 112.5% */
+    flex-direction: column;
+  }
+
+  .collaborators-section {
+    margin-top: 9.56rem;
+    margin-bottom: 10rem;
+  }
+
+  .collaborator-name {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem; /* 150% */
+  }
+
+  .collaborator-profession {
+    color: #a6a6a6;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+  }
+
+  .gallery-grid img:nth-child(4) {
+    grid-row: 5;
+  }
+
+  .related-works-section h2 {
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 4.125rem; /* 103.125% */
+    letter-spacing: -0.08rem;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+  }
+}

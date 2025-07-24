@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyecto</title>
+    <link rel="stylesheet" href="/css/general.css" />
+    <link rel="stylesheet" href="/css/nav.css" />
+  </head>
+  <body data-section-theme="light">
+    <nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo reveal-text">
+            <svg xmlns="http://www.w3.org/2000/svg" width="109" height="20" viewBox="0 0 109 20" fill="none">
+            <path d="M0 0H3.47597L12.6322 15.0692H12.6877V0H15.7487V19.5895H12.2748L3.09181 4.52035H3.03634V19.5895H0.00205323V0H0Z" fill="white"/>
+            <path d="M16.8804 12.5756C16.8804 8.192 19.5284 5.17775 23.8303 5.17775C28.1321 5.17775 30.5049 7.9716 30.5049 12.3001C30.5049 12.6838 30.5049 13.094 30.4782 13.3144H19.6661C19.7215 15.6715 21.1 17.8082 23.8857 17.8082C26.3674 17.8082 27.3062 16.2184 27.5815 15.2878H30.3118C29.5948 17.9735 27.5261 20 23.8303 20C19.362 20 16.8804 16.849 16.8804 12.5756ZM19.664 11.2062H27.6616C27.6616 9.01444 26.1455 7.3716 23.746 7.3716C21.4842 7.3716 19.8304 8.90628 19.664 11.2062Z" fill="white"/>
+            <path d="M36.8203 17.6979C39.1377 17.6979 40.6271 16.3 40.6271 14.1919V5.61647H43.3306V19.5897H40.6271V17.8367H40.5716C39.8279 18.9061 38.3652 19.9734 35.939 19.9734C33.3464 19.9734 31.251 18.4939 31.251 15.2878V5.61647H33.9812V14.547C33.9812 16.4367 34.8091 17.6979 36.8224 17.6979H36.8203Z" fill="white"/>
+            <path d="M44.2139 12.5756C44.2139 8.192 46.8619 5.17775 51.1638 5.17775C55.4656 5.17775 57.8384 7.9716 57.8384 12.3001C57.8384 12.6838 57.8384 13.094 57.8117 13.3144H46.9996C47.055 15.6715 48.4335 17.8082 51.2192 17.8082C53.7009 17.8082 54.6397 16.2184 54.915 15.2878H57.6453C56.9283 17.9735 54.8595 20 51.1638 20C46.6955 20 44.2139 16.849 44.2139 12.5756ZM46.9975 11.2062H54.9951C54.9951 9.01444 53.479 7.3716 51.0795 7.3716C48.8177 7.3716 47.1639 8.90628 46.9975 11.2062Z" fill="white"/>
+            <path d="M66.8014 0V19.5895H63.7671V0H66.8014Z" fill="white"/>
+            <path d="M78.4679 7.31419V0H81.1981V19.5895H78.4679V17.9467H78.4124C77.6688 18.9324 76.2882 19.9732 74.0819 19.9732C70.497 19.9732 67.7935 17.2059 67.7935 12.6039C67.7935 8.00194 70.497 5.20606 74.0819 5.20606C76.2882 5.20606 77.6667 6.22033 78.4124 7.31624H78.4679V7.31419ZM78.4679 12.6019C78.4679 9.42436 76.9518 7.45092 74.5235 7.45092C71.8755 7.45092 70.6079 9.86109 70.6079 12.6019C70.6079 15.3427 71.8775 17.7528 74.5235 17.7528C76.9497 17.7528 78.4679 15.7529 78.4679 12.6019Z" fill="white"/>
+            <path d="M82.0532 12.5756C82.0532 8.192 84.7013 5.17775 89.0031 5.17775C93.3049 5.17775 95.6777 7.9716 95.6777 12.3001C95.6777 12.6838 95.6777 13.094 95.649 13.3144H84.8389C84.8944 15.6715 86.2729 17.8082 89.0586 17.8082C91.5402 17.8082 92.4791 16.2184 92.7544 15.2878H95.4846C94.7676 17.9735 92.6989 20 89.0031 20C84.5349 20 82.0532 16.849 82.0532 12.5756ZM84.8389 11.2062H92.8365C92.8365 9.01444 91.3204 7.3716 88.9209 7.3716C86.6591 7.3716 85.0053 8.90628 84.8389 11.2062Z" fill="white"/>
+            <path d="M95.9263 15.9715C95.9263 12.8491 98.2991 11.945 101.802 11.2593C104.008 10.8491 105.36 10.5736 105.36 9.20424C105.36 8.18996 104.754 7.34099 102.685 7.34099C100.23 7.34099 99.4865 8.10833 99.3468 9.97157H96.5898C96.7275 7.2859 98.4922 5.17775 102.796 5.17775C105.693 5.17775 108.008 6.38386 108.008 10.0001V16.4123C108.008 17.4266 108.146 17.947 108.669 17.947C108.752 17.947 108.836 17.947 109 17.9204V19.5633C108.532 19.6735 108.063 19.7265 107.622 19.7265C106.299 19.7265 105.553 19.2061 105.415 17.6164H105.36C104.423 19.0694 102.823 19.9735 100.534 19.9735C97.7218 19.9735 95.9283 18.3572 95.9283 15.9735L95.9263 15.9715ZM105.36 14.1368V12.1368C104.918 12.5491 103.706 12.8491 102.272 13.1511C99.7905 13.6715 98.7695 14.3287 98.7695 15.7817C98.7695 17.096 99.4598 17.8082 101.142 17.8082C103.568 17.8082 105.362 16.5756 105.362 14.1368H105.36Z" fill="white"/>
+            </svg>
+        </a>
+
+        <ul class="nav-menu" id="nav-menu">
+            <li class="nav-item reveal-text">
+                <a href="about.html" class="nav-link">
+                    <span>Works</span>
+                </a>
+            </li>
+
+             <li class="nav-item reveal-text">
+                <a href="about.html" class="nav-link">
+                    <span>About</span>
+                </a>
+            </li>
+
+            <li class="nav-item reveal-text">
+                <a href="blog.html" class="nav-link">
+                    <span>Blog</span>
+                </a>
+            </li>
+
+            <li class="nav-item reveal-text">
+                <a href="blog.html" class="nav-link">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="mobile-nav-controls">
+            <button class="nav-toggler" aria-label="Toggle navigation">
+                <!-- <span class="t-1"></span>
+                <span class="t-2"></span> -->
+                <svg width="52" height="12" viewBox="0 0 52 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M52 0.5H0M52 11.5H13.7027" stroke="white"/>
+                </svg>
+            </button>
+        </div>
+        <div class="mobile-nav">
+            <div class="mobile-nav-header">
+
+                <button class="close-btn" aria-label="Close navigation">
+                    <svg width="52" height="12" viewBox="0 0 52 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M52 1H0" stroke="black"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="mobile-nav-content">
+                <ul class="mobile-main-links">
+                <li><a href="index.html"><span>Works</span></a></li>
+                    <li><a href="about.html"><span>About</span></a></li>
+                    <li><a href="lab.html"><span>Blog</span></a></li>
+                    <li><a href="blog.html"><span>Contact</span></a></li>
+                </ul>
+                <div class="mobile-secondary-links">
+                                <div class="f_wrapper">
+                                    <div class="f_l">
+                                        <span>Naming: Eduardo Carvajal (VE)</span>
+                                        <span>Code: Arturo Pérez (VE)</span>
+                                        <span>Web Design: Jesús Bauza (VE)</span>
+                                        <span>Typeface: PP Neue Montreal</span>
+                                        <span>LinkedIn: <a href="https://www.linkedin.com/company/neueidea/">Neue Idea</a></span>
+                                    </div>
+                                    <div class="f_r">
+                                        © 2025 Neue Idea. All rights reserved.
+                                        The content of this website is protected by copyright. None of the material, whether text or images, may be used for any purpose other than personal use unless expressly authorised.
+                                    </div>
+                                </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="project-container">
+      <article id="project-content">
+        <div class="wrapper_header">
+          <h1 id="project-title">Cargando...</h1>
+
+          <div id="project-meta" class="meta-info"></div>
+        </div>
+        <img
+          id="project-cover"
+          src=""
+          alt="Cover del proyecto"
+          class="cover-image"
+        />
+
+        <section id="project-info" class="project-description"></section>
+
+        <section class="collaborators-section">
+          <h2>Colaboradores</h2>
+          <div id="project-collaborators"></div>
+        </section>
+
+        <section class="gallery-section">
+          <h2>Galería</h2>
+          <div id="project-gallery" class="gallery-grid"></div>
+        </section>
+      </article>
+    </main>
+
+    <footer>...</footer>
+    <script src="/js/nav.js" defer></script>
+  </body>
+</html>
