@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const apiUrl = "http://neue-backend-production.up.railway.app/api/about";
+  const apiUrl = "https://neue-backend-production.up.railway.app/api/about";
   const textElement = document.getElementById("about-text");
 
   function renderRichTextToHtml(blocks) {
