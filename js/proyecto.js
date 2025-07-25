@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // === Bloque 3: Lógica principal ===
   try {
     // --- LLAMADA 1: OBTENER EL PROYECTO ---
-    const projectApiUrl = `http://localhost:1337/api/proyectos?filters[Uid][$eq]=${projectUID}&populate=*`;
+    const projectApiUrl = `https://neue-backend-production.up.railway.app/api/proyectos?filters[Uid][$eq]=${projectUID}&populate=*`;
     const projectResponse = await fetch(projectApiUrl);
     if (!projectResponse.ok)
       throw new Error(
@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         .join("&");
 
       // ▼▼▼ CAMBIO CLAVE: Usamos populate=* también aquí ▼▼▼
-      const relatedApiUrl = `http://localhost:1337/api/proyectos?${idFilters}&populate=*`;
+      const relatedApiUrl = `https://neue-backend-production.up.railway.app/api/proyectos?${idFilters}&populate=*`;
 
       const relatedResponse = await fetch(relatedApiUrl);
       if (!relatedResponse.ok)
