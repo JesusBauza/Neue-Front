@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const projectsGrid = document.getElementById("projects-grid");
+
+  // URL de tu API en producción. Asegúrate de que usa https://
   const apiUrl =
     "https://neue-backend-production.up.railway.app/api/proyectos?populate=*";
 
@@ -14,60 +16,51 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    projectsGrid.innerHTML = "";
+    projectsGrid.innerHTML = ""; // Limpiamos el contenedor.
 
-    // --- Lógica de renderizado con el nuevo patrón ---
+    let sectionCounter = 0; // Contador para alternar las clases.
 
-    // Función auxiliar para crear una tarjeta de proyecto
-    function createProjectCard(project) {
-      const uid = project.Uid;
-      const title = project.Titulo;
-      const imageUrl = project.Home_Cover?.url || "";
-      const category = project.categoria?.Nombre || "Sin categoría";
+    // Bucle principal que avanza de 3 en 3.
+    for (let i = 0; i < data.length; i += 3) {
+      // Tomamos un "trozo" de hasta 3 proyectos.
+      const projectsChunk = data.slice(i, i + 3);
 
-      const cardLink = document.createElement("a");
-      cardLink.href = `proyecto.html?uid=${uid}`;
-      cardLink.className = "project-card";
+      // Creamos el elemento <section> que los agrupará.
+      const sectionElement = document.createElement("section");
 
-      cardLink.innerHTML = `
-                <img src="${imageUrl}" alt="${title}">
-                <div class="project-card-info">
-                    <span>${title}</span>
-                    <span>${category}</span>
-                </div>
-            `;
-      return cardLink;
-    }
+      // Decidimos la clase basándonos en si el contador es par o impar.
+      const sectionClass =
+        sectionCounter % 2 === 0 ? "articles-1" : "articles-2";
+      sectionElement.className = sectionClass;
 
-    // --- Paso 1: Manejar la primera sección especial ---
-    if (data.length > 0) {
-      // Tomamos los primeros 3 proyectos (o los que haya si son menos de 3)
-      const firstChunk = data.slice(0, 3);
-      const section1 = document.createElement("section");
-      section1.className = "articles-1"; // La primera sección siempre es articles-1
+      // Llenamos la sección con las tarjetas de los proyectos.
+      projectsChunk.forEach((project) => {
+        // Asumimos la estructura de tu API sin la capa 'attributes'.
+        const uid = project.Uid;
+        const title = project.Titulo;
+        const imageUrl = project.Home_Cover?.url || "";
+        const category = project.categoria?.Nombre || "Sin categoría";
 
-      firstChunk.forEach((project) => {
-        const card = createProjectCard(project);
-        section1.appendChild(card);
+        const cardLink = document.createElement("a");
+        cardLink.href = `proyecto.html?uid=${uid}`;
+        cardLink.className = "project-card";
+
+        cardLink.innerHTML = `
+                    <img src="${imageUrl}" alt="${title}">
+                    <div class="project-card-info">
+                        <span>${title}</span>
+                        <span>${category}</span>
+                    </div>
+                `;
+
+        // Añadimos la tarjeta a la sección actual.
+        sectionElement.appendChild(cardLink);
       });
-      projectsGrid.appendChild(section1);
-    }
 
-    // --- Paso 2: Manejar el resto de secciones (todas como articles-2) ---
-    if (data.length > 3) {
-      const remainingProjects = data.slice(3); // Tomamos los proyectos a partir del 4to
-      for (let i = 0; i < remainingProjects.length; i += 3) {
-        const chunk = remainingProjects.slice(i, i + 3);
+      // Añadimos la sección completa al contenedor principal.
+      projectsGrid.appendChild(sectionElement);
 
-        const section2 = document.createElement("section");
-        section2.className = "articles-2"; // Todas las siguientes secciones son articles-2
-
-        chunk.forEach((project) => {
-          const card = createProjectCard(project);
-          section2.appendChild(card);
-        });
-        projectsGrid.appendChild(section2);
-      }
+      sectionCounter++; // Incrementamos el contador para la siguiente sección.
     }
   } catch (error) {
     console.error("Error al cargar los proyectos:", error);
