@@ -1,3 +1,11 @@
+.navbar {
+  padding: 1.5rem 0.94rem 0 1.25rem;
+}
+
+footer {
+  padding: 0 1.13rem 0.75rem 1.37rem;
+}
+
 .projects-container {
   padding: 40px 20px; /* Espaciado interior */
   margin: 0 auto;
