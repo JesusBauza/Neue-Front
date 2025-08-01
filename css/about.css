@@ -27,7 +27,7 @@ body {
   color: #fff !important;
 }
 
-.dark {
+.dark .f_wrapper {
   color: #fff;
   align-items: baseline;
   justify-content: left;
