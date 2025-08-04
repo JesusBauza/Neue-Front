@@ -42,6 +42,10 @@ body {
   width: 14.625rem;
 }
 
+.highlighted {
+  color: #0009ff; /* O el color de resaltado que pre; /* Transición suave (opcional) */
+}
+
 @media (max-width: 700px) {
   #about-text {
     font-size: 1.5rem;

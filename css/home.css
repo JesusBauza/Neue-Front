@@ -3,12 +3,59 @@
 }
 
 footer {
-  padding: 0 1.13rem 0.75rem 1.37rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 0rem 1.13rem 0.75rem 1.37rem;
 }
 
 .projects-container {
   padding: 40px 20px; /* Espaciado interior */
   margin: 0 auto;
+}
+.project-card .project-card-info .category-container {
+  position: relative;
+  overflow: hidden;
+  height: 20px; /* Ajusta la altura a tu fuente */
+
+  /* --- CAMBIOS CLAVE --- */
+  width: 100px; /* Dale un ancho fijo, ajústalo según necesites */
+  display: flex;
+  justify-content: flex-end; /* Alinea el contenido a la derecha */
+  margin-left: auto; /* Empuja el contenedor a la derecha de la tarjeta */
+}
+
+.project-card .project-card-info .category-container span {
+  display: block;
+  line-height: 20px;
+  transition: transform 0.3s ease-in-out;
+
+  /* --- CAMBIOS CLAVE --- */
+  min-width: 100px; /* Asegura que ambos textos ocupen el ancho del contenedor */
+  text-align: right; /* Alinea el texto a la derecha dentro de su span */
+}
+
+.project-card .project-card-info .category-container .category-hover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%; /* Asegura que ocupe todo el ancho */
+}
+
+.project-card:hover .project-card-info .category-container .category-original,
+.project-card:hover
+  .project-card-info
+  .category-container.hovered
+  .category-original {
+  transform: translateY(-100%);
+}
+
+.project-card:hover .project-card-info .category-container .category-hover,
+.project-card:hover
+  .project-card-info
+  .category-container.hovered
+  .category-hover {
+  transform: translateY(-100%);
 }
 
 /* Estilos para la primera, tercera, quinta, etc., sección */
@@ -109,7 +156,11 @@ footer {
   align-self: stretch;
   aspect-ratio: 296/377;
   object-fit: cover;
-  margin-bottom: 8px;
+  margin-bottom: 0px;
+}
+
+.parallax-card {
+  will-change: transform;
 }
 
 .project-card-info {
@@ -121,6 +172,7 @@ footer {
   line-height: 0.875rem; /* 116.667% */
   letter-spacing: -0.015rem;
   text-transform: uppercase;
+  align-items: baseline;
 }
 
 /* --- Media Query para pantallas más pequeñas (móviles) --- */
