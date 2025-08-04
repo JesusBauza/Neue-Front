@@ -27,7 +27,7 @@ body {
   color: #fff !important;
 }
 #about-text a:hover {
-  text-decoration: solid;
+  text-decoration: underline;
 }
 
 .dark .f_wrapper {

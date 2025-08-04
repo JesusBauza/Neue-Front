@@ -65,6 +65,35 @@ body {
   overflow: hidden;
 }
 
+#project-cover {
+  /* ...tus estilos existentes como height, object-fit, etc... */
+
+  /* Preparamos el elemento para la animación de transformación */
+  will-change: transform;
+}
+
+/* La Máscara (el contenedor) */
+.cover-mask {
+  height: 32.5rem; /* La altura que quieres que tenga tu imagen visible */
+  overflow: hidden; /* ¡LA CLAVE! Esto recorta la imagen que se desborde */
+  position: relative; /* Para centrar la imagen que está dentro */
+}
+
+/* La Imagen que se Mueve (dentro de la máscara) */
+#project-cover.cover-image {
+  width: 100%;
+  /* Hacemos la imagen un 30% más alta que la máscara para tener espacio para el parallax */
+  height: 130%;
+  object-fit: cover;
+
+  /* La posicionamos para que el exceso de altura se distribuya arriba y abajo */
+  position: relative;
+  top: -10%;
+
+  /* Preparamos la imagen para la animación de parallax */
+  will-change: transform;
+}
+
 .info-proyecto {
   display: flex;
   justify-content: space-between;
@@ -147,6 +176,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Asegura que la imagen llene el espacio sin deformarse */
+  cursor: zoom-in; /* <-- AÑADE ESTA LÍNEA */
 }
 
 /* Selecciona la 1ra, 4ta, 7ma... imagen (cada 3 imágenes, empezando por la primera)
@@ -200,6 +230,60 @@ body {
   line-height: 1.75rem; /* 175% */
   letter-spacing: -0.02rem;
   text-transform: uppercase;
+}
+
+/* --- Estilos para el Lightbox (Ahora con Scroll) --- */
+
+.lightbox {
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+
+  /* Permite el scroll vertical dentro del lightbox */
+  overflow-y: auto;
+}
+
+/* El contenedor de la columna de imágenes */
+.lightbox-content-scroll {
+  width: 90%; /* Ancho de la columna de imágenes */
+  max-width: 1200px; /* Un ancho máximo para pantallas grandes */
+  margin: 60px auto; /* Centrado y con espacio arriba/abajo */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacio entre las imágenes */
+}
+
+/* Cada imagen dentro del lightbox */
+.lightbox-content-scroll img {
+  width: 100%;
+  height: auto;
+}
+
+/* El botón de cierre se mantiene igual */
+.lightbox-close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+  z-index: 10000; /* Asegura que esté por encima de las imágenes */
+}
+
+.lightbox-close:hover {
+  color: #bbb;
+}
+
+/* Evita que se pueda hacer scroll en el fondo cuando el lightbox está abierto */
+body.no-scroll {
+  overflow: hidden;
 }
 
 @media (max-width: 1150px) {
