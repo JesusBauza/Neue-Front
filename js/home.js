@@ -79,18 +79,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
  */
-
 // ==========================================================================
-// Bloque 1: Lógica del Efecto Parallax
+// Bloque 1: Lógica del Efecto Parallax para Imágenes
 // ==========================================================================
 window.addEventListener("scroll", function () {
-  const scrollPosition = window.scrollY;
-  const parallaxCards = document.querySelectorAll(".parallax-card");
+  const parallaxImages = document.querySelectorAll(".parallax-image");
+  const speed = 0.2;
 
-  parallaxCards.forEach((card) => {
-    const speed = parseFloat(card.dataset.speed) || 0.2;
-    const translateY = scrollPosition * speed;
-    card.style.transform = `translateY(${translateY}px)`;
+  parallaxImages.forEach((image) => {
+    const imageContainer = image.parentElement;
+    const rect = imageContainer.getBoundingClientRect();
+
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const yPos = (rect.top - window.innerHeight / 2) * -speed;
+      image.style.transform = `translateY(${yPos}px)`;
+    }
   });
 });
 
@@ -131,14 +134,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const cardLink = document.createElement("a");
         cardLink.href = `proyecto.html?uid=${uid}`;
+        cardLink.className = "project-card";
 
-        // 1. Lógica del Parallax: Asignamos clase y velocidad
-        cardLink.className = "project-card parallax-card";
-        cardLink.dataset.speed = "0.15";
-
-        // 2. Lógica del Rolling Text: Creamos la estructura HTML necesaria
+        // Estructura HTML que incluye el parallax de imagen Y el rolling text
         cardLink.innerHTML = `
-                    <img src="${imageUrl}" alt="${title}">
+                    <div class="card-image-container">
+                        <img class="parallax-image" src="${imageUrl}" alt="${title}">
+                    </div>
                     <div class="project-card-info">
                         <span>${title}</span>
                         <div class="category-container">
@@ -148,7 +150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     </div>
                 `;
 
-        // 3. Lógica del Rolling Text: Añadimos los eventos de hover
+        // Lógica de eventos para el "rolling text"
         cardLink.addEventListener("mouseover", () => {
           const categoryContainer = cardLink.querySelector(
             ".category-container"

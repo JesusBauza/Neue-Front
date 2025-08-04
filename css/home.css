@@ -3,7 +3,7 @@
 }
 
 footer {
-  padding: 0rem 1.13rem 0.75rem 1.37rem;
+  padding: 16.06rem 1.13rem 0.75rem 1.37rem;
 }
 
 .projects-container {
@@ -148,17 +148,35 @@ footer {
   color: inherit;
 }
 
-.project-card img {
+.card-image-container {
+  height: 23.5625rem;
+  aspect-ratio: 296/377;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.parallax-image {
+  width: 100%;
+  /* Hacemos la imagen un 20% más alta que su contenedor para tener espacio para moverla */
+  height: 120%;
+  object-fit: cover; /* Asegura que la imagen cubra el espacio sin deformarse */
+
+  /* La centramos verticalmente al inicio */
+  position: relative;
+  top: -20%;
+
+  /* Preparamos la imagen para la animación */
+  will-change: transform;
+}
+
+/* .project-card img {
   height: 23.5625rem;
   align-self: stretch;
   aspect-ratio: 296/377;
   object-fit: cover;
   margin-bottom: 0px;
-}
-
-.parallax-card {
-  will-change: transform;
-}
+} */
 
 .project-card-info {
   display: flex;

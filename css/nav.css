@@ -272,3 +272,44 @@ html.no-scroll {
     margin-right: 2.5rem;
   }
 }
+
+/* --- Efecto Rolling Text para el Menú --- */
+
+/* Contenedor del enlace en el menú de escritorio */
+.nav-link {
+  display: block;
+  overflow: hidden; /* Oculta el texto duplicado */
+  height: 1.125rem; /* Altura para mostrar una sola línea (ajusta según tu line-height) */
+}
+
+/* El span interior que contiene el texto duplicado */
+.nav-link span {
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1); /* Animación suave */
+}
+
+/* Al hacer hover sobre el enlace, se mueve el span hacia arriba */
+.nav-link:hover span {
+  transform: translateY(-50%);
+}
+
+/* --- Hacemos lo mismo para el menú móvil --- */
+
+/* Contenedor del enlace en el menú móvil */
+.mobile-main-links li a {
+  display: block;
+  overflow: hidden;
+  height: 3rem; /* Altura para mostrar una sola línea (ajusta a tu font-size) */
+  line-height: 3rem; /* Centra el texto verticalmente */
+}
+
+/* El span interior del menú móvil */
+.mobile-main-links li a span {
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+/* El efecto hover para el menú móvil */
+.mobile-main-links li a:hover span {
+  transform: translateY(-50%);
+}

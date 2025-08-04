@@ -5,7 +5,22 @@ document.addEventListener("DOMContentLoaded", function () {
   const navToggler = document.querySelector(".nav-toggler");
   const mobileNav = document.querySelector(".mobile-nav");
   const closeBtn = document.querySelector(".close-btn");
-  const mobileMenuLinks = document.querySelectorAll(".mobile-nav a"); // Selector para los enlaces del menú
+  const mobileMenuLinks = document.querySelectorAll(".mobile-nav a");
+
+  // ▼▼▼ CÓDIGO AÑADIDO PARA EL ROLLING TEXT ▼▼▼
+  // Selecciona todos los enlaces que necesitan el efecto en desktop y móvil.
+  const rollingLinks = document.querySelectorAll(
+    ".nav-link span, .mobile-main-links a span"
+  );
+
+  rollingLinks.forEach((span) => {
+    const originalText = span.textContent.trim();
+    if (originalText) {
+      // Duplicamos el texto con un <br> en medio para crear el efecto.
+      span.innerHTML = `${originalText}<br>${originalText}`;
+    }
+  });
+  // ▲▲▲ FIN DEL CÓDIGO AÑADIDO ▲▲▲
 
   // --- Corrección del color inicial del Navbar al cargar la página ---
   if (sections.length > 0) {
