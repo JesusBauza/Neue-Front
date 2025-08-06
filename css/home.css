@@ -190,9 +190,91 @@ footer {
   align-items: baseline;
 }
 
+.neue {
+  display: none;
+}
+
+@media (max-width: 905px) {
+  /* Hacemos que .articles-1 (y .articles-2 por si acaso) tengan 2 columnas */
+  .articles-1,
+  .articles-2 {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-around; /* Opcional: centra las columnas */
+    justify-items: center;
+  }
+
+  /* Reseteamos los márgenes verticales que usamos para el escalonado en desktop */
+  .articles-1 .project-card:nth-child(2),
+  .articles-1 .project-card:nth-child(3),
+  .articles-2 .project-card:nth-child(1),
+  .articles-2 .project-card:nth-child(2),
+  .articles-2 .project-card:nth-child(3) {
+    margin-top: 10rem;
+  }
+
+  /* Reseteamos el orden de las columnas de .articles-2 para que sea el natural */
+  .articles-2 .project-card:nth-child(1),
+  .articles-2 .project-card:nth-child(2),
+  .articles-2 .project-card:nth-child(3) {
+    grid-column: auto;
+  }
+
+  .projects-container {
+    padding: 40px 0px; /* Espaciado interior */
+  }
+}
+
 /* --- Media Query para pantallas más pequeñas (móviles) --- */
 @media (max-width: 768px) {
   .projects-container {
     column-count: 1; /* En móviles, mostramos una sola columna */
+  }
+}
+
+@media (max-width: 560px) {
+  .articles-1 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .articles-1 .project-card:nth-child(2),
+  .articles-1 .project-card:nth-child(3),
+  .articles-2 .project-card:nth-child(1),
+  .articles-2 .project-card:nth-child(2),
+  .articles-2 .project-card:nth-child(3) {
+    margin-top: 3rem;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .navbar .nav-container {
+    justify-content: right;
+  }
+
+  .articles-1 {
+    margin-top: 0rem;
+    margin-bottom: 3rem;
+  }
+
+  .main-container {
+    padding: 0rem 1rem;
+  }
+
+  .neue {
+    display: block;
+    margin-top: 10rem;
+    margin-bottom: 2rem;
+  }
+
+  .projects-container {
+    padding: 0 0rem;
+  }
+
+  .card-image-container {
+    height: auto;
+    align-self: stretch;
+    aspect-ratio: 358/455.97;
   }
 }
