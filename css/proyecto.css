@@ -113,10 +113,10 @@ body {
   align-items: center;
   gap: 1.25rem;
   width: 43.12rem;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 1.5rem; /* 120% */
+  line-height: 1.4rem; /* 120% */
 }
 
 .collaborators-section {
@@ -153,14 +153,14 @@ body {
   text-transform: uppercase;
 }
 .collaborator-name {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-style: normal;
   font-weight: 500;
 }
 
 .collaborator-profession {
   color: #a6a6a6;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;
 }
@@ -184,6 +184,11 @@ body {
 */
 .gallery-grid img:nth-child(3n + 1) {
   grid-column: 1 / -1; /* Ocupa desde la línea 1 hasta la última (-1) */
+}
+
+.gallery-grid img:nth-child(3n + 2),
+.gallery-grid img:nth-child(3n + 3) {
+  height: 95vh; /* <-- Cambia este valor a la altura que desees */
 }
 
 /* Estilos para la sección de Trabajos Relacionados */
@@ -250,8 +255,8 @@ body {
 
 /* El contenedor de la columna de imágenes */
 .lightbox-content-scroll {
-  width: 90%; /* Ancho de la columna de imágenes */
-  max-width: 1200px; /* Un ancho máximo para pantallas grandes */
+  width: 98%; /* Ancho de la columna de imágenes */
+  max-width: 1600px; /* Un ancho máximo para pantallas grandes */
   margin: 60px auto; /* Centrado y con espacio arriba/abajo */
   display: flex;
   flex-direction: column;
@@ -266,7 +271,7 @@ body {
 
 /* El botón de cierre se mantiene igual */
 .lightbox-close {
-  position: absolute;
+  position: fixed;
   top: 15px;
   right: 35px;
   color: #f1f1f1;

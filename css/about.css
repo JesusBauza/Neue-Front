@@ -56,4 +56,12 @@ body {
     letter-spacing: -0.015rem;
     margin-top: 4.25rem;
   }
+
+  .dark .f_wrapper {
+    color: #fff;
+    align-items: baseline;
+    justify-content: left;
+    gap: 1.25rem;
+    margin-top: 9.69rem;
+  }
 }

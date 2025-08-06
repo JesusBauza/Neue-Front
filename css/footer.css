@@ -32,7 +32,9 @@ footer {
   }
 
   .f_wrapper {
+    display: inline-flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 1.25rem;
   }
 }
