@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         scale: 1.3,
         delay: 1,
         transition: "cubic-bezier(0,0,0,1)",
-        overflow: true, // Se recomienda 'true' para el efecto dentro de una máscara
+        overflow: false, // Se recomienda 'true' para el efecto dentro de una máscara
       });
     }
   }
