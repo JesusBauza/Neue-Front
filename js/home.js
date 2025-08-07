@@ -173,6 +173,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     return cardLink;
   }
 
+  // ▼▼▼ CAMBIO 1: Creamos una función para inicializar el parallax ▼▼▼
+  function initializeParallax() {
+    // Verificamos si la librería está disponible en la página
+    if (typeof simpleParallax !== "undefined") {
+      const images = document.querySelectorAll(".parallax-image");
+      new simpleParallax(images, {
+        scale: 1.3,
+        delay: 1,
+        transition: "cubic-bezier(0,0,0,1)",
+        overflow: true, // Se recomienda 'true' para el efecto dentro de una máscara
+      });
+    }
+  }
+
   // --- Función principal para renderizar los proyectos ---
   function renderProjects() {
     if (!projectsData || projectsData.length === 0) return;
@@ -201,6 +215,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       projectsGrid.appendChild(sectionElement);
       sectionCounter++;
     }
+
+    initializeParallax();
   }
 
   // --- Función de "debounce" para optimizar el evento resize ---
@@ -223,14 +239,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     projectsData = data;
 
     renderProjects(); // Renderizar al cargar la página
-
-    var images = document.querySelectorAll(".parallax-image");
-    new simpleParallax(images, {
-      scale: 1.4, // La imagen se hace un 20% más grande para el efecto
-      delay: 1,
-      transition: "cubic-bezier(0,0,0,1)",
-      overflow: false, // Es importante para que funcione dentro de tu máscara
-    });
 
     window.addEventListener("resize", debounce(renderProjects)); // Renderizar de nuevo al cambiar tamaño
   } catch (error) {
