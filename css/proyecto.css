@@ -28,7 +28,7 @@ body {
   font-size: 1rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 1.25rem; /* 125% */
+  line-height: 1.2rem; /* 125% */
   text-transform: uppercase;
 }
 
@@ -39,8 +39,8 @@ body {
   font-size: 7.5rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 7.375rem; /* 98.333% */
-  letter-spacing: -0.15rem;
+  line-height: 7rem; /* 98.333% */
+  letter-spacing: -0.2rem;
   text-transform: uppercase;
   white-space: pre-line;
 }
