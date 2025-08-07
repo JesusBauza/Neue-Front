@@ -103,11 +103,12 @@ document.addEventListener("DOMContentLoaded", async () => {
  */
 
 // ==========================================================================
-// Bloque 1: Lógica del Efecto Parallax para Imágenes (Versión Corregida)
+// Bloque 1: Lógica del Efecto Parallax para Imágenes
+// Se aplica a cualquier elemento con la clase .parallax-image
 // ==========================================================================
 window.addEventListener("scroll", function () {
   const parallaxImages = document.querySelectorAll(".parallax-image");
-  const speed = 0.1; // Puedes ajustar la velocidad
+  const speed = 0.05;
 
   parallaxImages.forEach((image) => {
     const imageContainer = image.parentElement;
@@ -115,13 +116,11 @@ window.addEventListener("scroll", function () {
 
     if (rect.top < window.innerHeight && rect.bottom > 0) {
       const yPos = (rect.top - window.innerHeight / 2) * -speed;
-
-      // ▼▼▼ CAMBIO CLAVE ▼▼▼
-      // Ahora combinamos el centrado vertical inicial con el movimiento del parallax
-      image.style.transform = `translateY(calc(-50% + ${yPos}px))`;
+      image.style.transform = `translateY(${yPos}px)`;
     }
   });
 });
+
 // ==========================================================================
 // Bloque 2: Lógica para Cargar y Renderizar los Proyectos
 // ==========================================================================
