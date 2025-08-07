@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 // ==========================================================================
 window.addEventListener("scroll", function () {
   const parallaxImages = document.querySelectorAll(".parallax-image");
-  const speed = 0.2;
+  const speed = 0.1;
 
   parallaxImages.forEach((image) => {
     const imageContainer = image.parentElement;
