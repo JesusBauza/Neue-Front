@@ -299,7 +299,7 @@ html.no-scroll {
 .mobile-main-links li a {
   display: block;
   overflow: hidden;
-  height: 3rem; /* Altura para mostrar una sola línea (ajusta a tu font-size) */
+  height: 3.1rem; /* Altura para mostrar una sola línea (ajusta a tu font-size) */
   line-height: 43px; /* Centra el texto verticalmente */
 }
 
