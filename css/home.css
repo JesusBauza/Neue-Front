@@ -156,17 +156,27 @@ footer {
   margin-bottom: 0.5rem;
 }
 
-.parallax-image {
+/* .parallax-image {
   width: 100%;
-  /* Hacemos la imagen un 20% más alta que su contenedor para tener espacio para moverla */
   height: 120%;
-  object-fit: cover; /* Asegura que la imagen cubra el espacio sin deformarse */
+  object-fit: cover; 
 
-  /* La centramos verticalmente al inicio */
   position: relative;
   top: -20%;
 
-  /* Preparamos la imagen para la animación */
+
+  will-change: transform;
+} */
+
+.parallax-image {
+  width: 100%;
+  height: 130%; /* Mantenemos la imagen más alta */
+  object-fit: cover;
+  position: relative; /* Usamos posicionamiento absoluto */
+  top: 50%; /* La movemos a la mitad del contenedor */
+  left: 0;
+  /* La centramos verticalmente con transform */
+  transform: translateY(-50%);
   will-change: transform;
 }
 
