@@ -122,27 +122,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 }); */
 
 // ==========================================================================
-// Bloque 1: Lógica del Efecto Parallax para Imágenes (Versión Corregida)
-// ==========================================================================
-window.addEventListener("scroll", function () {
-  const parallaxImages = document.querySelectorAll(".parallax-image");
-  const speed = 0.1; // Puedes ajustar la velocidad
-
-  parallaxImages.forEach((image) => {
-    const imageContainer = image.parentElement;
-    const rect = imageContainer.getBoundingClientRect();
-
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      const yPos = (rect.top - window.innerHeight / 2) * -speed;
-
-      // ▼▼▼ CAMBIO CLAVE ▼▼▼
-      // Ahora combinamos el centrado vertical inicial con el movimiento del parallax
-      image.style.transform = `translateY(calc(-50% + ${yPos}px))`;
-    }
-  });
-});
-
-// ==========================================================================
 // Bloque 2: Lógica para Cargar y Renderizar los Proyectos
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", async () => {
@@ -244,6 +223,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     projectsData = data;
 
     renderProjects(); // Renderizar al cargar la página
+
+    var images = document.querySelectorAll(".parallax-image");
+    new simpleParallax(images, {
+      scale: 1.4, // La imagen se hace un 20% más grande para el efecto
+      delay: 1,
+      transition: "cubic-bezier(0,0,0,1)",
+      overflow: false, // Es importante para que funcione dentro de tu máscara
+    });
 
     window.addEventListener("resize", debounce(renderProjects)); // Renderizar de nuevo al cambiar tamaño
   } catch (error) {

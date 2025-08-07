@@ -152,7 +152,7 @@ footer {
   height: 23.5625rem;
   aspect-ratio: 296/377;
   overflow: hidden;
-  position: relative;
+  /* position: relative; */
   margin-bottom: 0.5rem;
 }
 
@@ -170,14 +170,8 @@ footer {
 
 .parallax-image {
   width: 100%;
-  height: 130%; /* Mantenemos la imagen más alta */
+  height: 100%;
   object-fit: cover;
-  position: relative; /* Usamos posicionamiento absoluto */
-  top: 50%; /* La movemos a la mitad del contenedor */
-  left: 0;
-  /* La centramos verticalmente con transform */
-  transform: translateY(-50%);
-  will-change: transform;
 }
 
 /* .project-card img {
