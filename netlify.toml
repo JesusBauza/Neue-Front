@@ -1,0 +1,6 @@
+
+[[redirects]]
+
+  from = "/proyecto/:uid"
+  to = "/proyecto.html?uid=:uid"
+  status = 200
