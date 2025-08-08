@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const category = project.categoria?.Nombre || "Sin categoría";
 
     const cardLink = document.createElement("a");
-    cardLink.href = `proyecto.html?uid=${uid}`;
+    cardLink.href = `/proyecto/${uid}`;
     cardLink.className = "project-card";
 
     // Estructura HTML que incluye el parallax y el rolling text
