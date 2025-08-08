@@ -1,1 +1,1 @@
-/proyecto/:uid   /proyecto.html?uid=:uid   200
+proyectouid   proyecto.htmluid=uid   200
