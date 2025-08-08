@@ -1,6 +1,5 @@
 
 [[redirects]]
-
-  from = "/proyecto/:uid"
-  to = "/proyecto.html?uid=:uid"
+    from = "/proyecto.html?uid=:uid"
+  to = "/proyecto/:uid"
   status = 200
