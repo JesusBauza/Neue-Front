@@ -229,7 +229,7 @@ body {
   display: flex;
   justify-content: space-between; /* Pone el título a la izquierda y la categoría a la derecha */
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-style: normal;
   font-weight: 700;
   line-height: 1.75rem; /* 175% */
