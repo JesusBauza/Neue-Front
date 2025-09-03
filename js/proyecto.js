@@ -365,7 +365,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       galleryEl.appendChild(img);
     });
 
-    // --- LLAMADA 2: OBTENER LOS TRABAJOS RELACIONADOS ---
+    // --- LLAMADA 2: OBTENER LOS TRABAJOS RELACIONADOS (MODIFICADO) ---
     if (project.related_works && project.related_works.length > 0) {
       const relatedIds = project.related_works.map((work) => work.id);
       const idFilters = relatedIds
@@ -384,7 +384,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       relatedData.data.forEach((relatedWork) => {
         const cardLink = document.createElement("a");
         cardLink.href = `/proyecto/${relatedWork.Uid}`; // Apunta a la URL amigable
-        cardLink.className = "related-card";
+        cardLink.className = "related-card"; // Mantén la clase actual
         const imageUrl = relatedWork.Home_Cover
           ? relatedWork.Home_Cover.url
           : "";
@@ -392,7 +392,39 @@ document.addEventListener("DOMContentLoaded", async () => {
         const category = relatedWork.categoria
           ? relatedWork.categoria.Nombre
           : "";
-        cardLink.innerHTML = `<img src="${imageUrl}" alt="${title}"><div class="related-card-info"><span>${title}</span><span>${category}</span></div>`;
+
+        // ▼▼▼ MODIFICACIÓN PARA EL ROLLING TEXT ▼▼▼
+        cardLink.innerHTML = `
+            <img src="${imageUrl}" alt="${title}">
+            <div class="related-card-info">
+                <span>${title}</span>
+                <div class="category-container">
+                    <span class="category-original">${category}</span>
+                    <span class="category-hover">View Details</span>
+                </div>
+            </div>
+        `;
+
+        // Añadir listeners para el efecto hover
+        cardLink.addEventListener("mouseover", () => {
+          const categoryContainer = cardLink.querySelector(
+            ".category-container"
+          );
+          if (categoryContainer) {
+            categoryContainer.classList.add("hovered");
+          }
+        });
+
+        cardLink.addEventListener("mouseout", () => {
+          const categoryContainer = cardLink.querySelector(
+            ".category-container"
+          );
+          if (categoryContainer) {
+            categoryContainer.classList.remove("hovered");
+          }
+        });
+        // ▲▲▲ FIN DE LA MODIFICACIÓN ▲▲▲
+
         relatedWorksGrid.appendChild(cardLink);
       });
     }
