@@ -431,46 +431,32 @@ body.no-scroll {
     margin-bottom: 3rem;
   }
 }
-/* --- Estilos para el efecto Rolling Text en Related Works --- */
-
-.related-card-info {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-  font-size: 1rem;
-  line-height: 1.75rem;
-  letter-spacing: -0.02rem;
-  text-transform: uppercase;
-  /* Necesario para que el overflow y el posicionamiento funcionen */
-  position: relative;
-}
-
+/* El contenedor de la categoría actúa como MÁSCARA.
+   Debe tener una altura fija y ocultar lo que se desborde. */
 .related-card-info .category-container {
-  height: 1.75rem; /* La altura de una línea de texto */
-  overflow: hidden; /* Esto es clave para que el texto "ruede" */
+  height: 1.2rem; /* Altura aproximada de una línea de texto (ajústala si es necesario) */
+  line-height: 1.2rem; /* Ayuda a alinear el texto verticalmente */
+  overflow: hidden; /* ¡LA CLAVE! Recorta el texto que se sale */
   position: relative;
-  display: flex; /* Para controlar los spans internos */
-  flex-direction: column; /* Para que los spans estén uno debajo del otro */
-  justify-content: flex-start; /* Asegura que el original esté arriba */
-  transition: transform 0.3s ease-in-out; /* Transición para la animación */
+  width: 100px; /* Ancho fijo que ya habías pedido */
+  text-align: right; /* Alinea el texto a la derecha */
 }
 
-.related-card-info .category-container.hovered {
-  transform: translateY(-100%); /* Desplaza el contenedor hacia arriba */
-}
-
+/* Estilo para AMBOS spans (original y hover) para la animación */
 .related-card-info .category-container span {
-  display: block; /* Asegura que cada span ocupe su propia línea */
-  flex-shrink: 0; /* Evita que el texto se encoja */
-  white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
-  width: 100%; /* Ocupa el ancho disponible */
-  text-align: right; /* Alinea el texto a la derecha, si es el caso */
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1); /* Animación suave */
 }
 
-.related-card-info .category-hover {
-  position: absolute;
-  top: 100%; /* Inicialmente debajo del texto original */
-  left: 0;
-  width: 100%;
-  text-align: right;
+/* --- El Efecto Hover --- */
+
+/* Cuando la tarjeta tiene hover Y el contenedor tiene la clase .hovered... */
+.related-card:hover .category-container.hovered .category-original {
+  /* ...el texto original se desliza hacia ARRIBA y desaparece */
+  transform: translateY(-100%);
+}
+
+.related-card:hover .category-container.hovered .category-hover {
+  /* ...el texto de hover se desliza hacia ARRIBA a la posición original (desde abajo) */
+  transform: translateY(-100%);
 }
