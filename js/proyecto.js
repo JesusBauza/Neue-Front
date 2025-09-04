@@ -329,6 +329,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const project = projectData.data[0];
 
+    document.title = `${project.Titulo} | Neue Idea`;
+
     // --- RENDERIZAR DATOS PRINCIPALES ---
     titleEl.textContent = project.Titulo;
     const servicesListItems = project.servicios
