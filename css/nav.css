@@ -300,7 +300,7 @@ html.no-scroll {
   display: block;
   overflow: hidden;
   height: 3.1rem; /* Altura para mostrar una sola línea (ajusta a tu font-size) */
-  line-height: 43px; /* Centra el texto verticalmente */
+  line-height: 44px; /* Centra el texto verticalmente */
 }
 
 /* El span interior del menú móvil */
