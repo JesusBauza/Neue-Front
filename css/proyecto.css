@@ -237,56 +237,71 @@ body {
   position: relative;
 }
 
-/* --- Estilos para el Lightbox (Ahora con Scroll) --- */
+/* --- Estilos para el Lightbox Personalizado --- */
 
-.lightbox {
+.lightbox-custom {
   display: none; /* Oculto por defecto */
   position: fixed;
   z-index: 9999;
+  padding: 20px;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: #fff;
-
-  /* Permite el scroll vertical dentro del lightbox */
-  overflow-y: auto;
-}
-
-/* El contenedor de la columna de imágenes */
-.lightbox-content-scroll {
-  width: 98%; /* Ancho de la columna de imágenes */
-  max-width: 1600px; /* Un ancho máximo para pantallas grandes */
-  margin: 60px auto; /* Centrado y con espacio arriba/abajo */
+  background-color: rgba(0, 0, 0, 0.9);
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  gap: 20px; /* Espacio entre las imágenes */
+  justify-content: center;
+  align-items: center;
 }
 
-/* Cada imagen dentro del lightbox */
-.lightbox-content-scroll img {
-  width: 100%;
-  height: auto;
+/* La imagen dentro del lightbox */
+.lightbox-content-custom {
+  display: block;
+  max-width: 90%;
+  max-height: 90vh;
+  transition: transform 0.3s ease-in-out;
 }
 
-/* El botón de cierre se mantiene igual */
-.lightbox-close {
-  position: fixed;
+/* Botón de cierre */
+.lightbox-close-custom {
+  position: absolute;
   top: 15px;
   right: 35px;
   color: #f1f1f1;
   font-size: 40px;
   font-weight: bold;
-  transition: 0.3s;
   cursor: pointer;
-  z-index: 10000; /* Asegura que esté por encima de las imágenes */
 }
 
-.lightbox-close:hover {
-  color: #bbb;
+/* Flechas de navegación */
+.lightbox-custom .prev,
+.lightbox-custom .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  transition: 0.6s ease;
+  user-select: none;
 }
 
-/* Evita que se pueda hacer scroll en el fondo cuando el lightbox está abierto */
+/* Posicionar la flecha de "siguiente" a la derecha */
+.lightbox-custom .next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.lightbox-custom .prev:hover,
+.lightbox-custom .next:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Evita el scroll del fondo cuando el lightbox está abierto */
 body.no-scroll {
   overflow: hidden;
 }

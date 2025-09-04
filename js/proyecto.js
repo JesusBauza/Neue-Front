@@ -26,11 +26,67 @@ document.addEventListener("DOMContentLoaded", async () => {
   const contentContainer =
     document.getElementById("project-content") || document.body;
 
+  const lightbox = document.getElementById("lightbox-custom");
+  const lightboxImg = document.getElementById("lightbox-img-custom");
+  const lightboxClose = document.querySelector(".lightbox-close-custom");
+  const prevArrow = document.querySelector(".lightbox-custom .prev");
+  const nextArrow = document.querySelector(".lightbox-custom .next");
+
   // ▼▼▼ AQUÍ ESTÁ LA MODIFICACIÓN ▼▼▼
   // === Lógica para Cargar Datos de Strapi desde la RUTA AMIGABLE ===
   const path = window.location.pathname; // ej: "/proyecto/eduardo-carvajal"
   const pathParts = path.split("/"); // -> ["", "proyecto", "eduardo-carvajal"]
   const projectUID = pathParts[pathParts.length - 1]; // -> "eduardo-carvajal"
+
+  let galleryImages = []; // Array para guardar las URLs de las imágenes
+  let currentImageIndex = 0;
+
+  function openLightbox(index) {
+    if (!lightbox) return;
+    currentImageIndex = index;
+    lightboxImg.src = galleryImages[currentImageIndex];
+    lightbox.style.display = "flex"; // Usamos flex para centrar
+    document.body.classList.add("no-scroll");
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.style.display = "none";
+    document.body.classList.remove("no-scroll");
+  }
+
+  function showNextImage() {
+    currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentImageIndex];
+  }
+
+  function showPrevImage() {
+    currentImageIndex =
+      (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentImageIndex];
+  }
+
+  if (galleryEl && lightbox) {
+    galleryEl.addEventListener("click", (e) => {
+      if (e.target.tagName === "IMG") {
+        e.preventDefault();
+        const clickedImageSrc = e.target.src;
+        const clickedIndex = galleryImages.indexOf(clickedImageSrc);
+        openLightbox(clickedIndex);
+      }
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    prevArrow.addEventListener("click", showPrevImage);
+    nextArrow.addEventListener("click", showNextImage);
+
+    // Opcional: Cerrar al hacer clic en el fondo oscuro
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+  }
 
   if (!projectUID) {
     contentContainer.innerHTML =
@@ -88,6 +144,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       img.src = image.url;
       img.alt = image.alternativeText || project.Titulo;
       galleryEl.appendChild(img);
+      galleryImages.push(image.url);
     });
 
     // --- LLAMADA 2: OBTENER LOS TRABAJOS RELACIONADOS (MODIFICADO) ---
