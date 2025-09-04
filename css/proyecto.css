@@ -166,60 +166,29 @@ body {
 }
 
 /* === La Magia del Grid de la Galería === */
-/* .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); 
-  gap: 15px;
-}
-
-.gallery-grid img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; 
-  cursor: zoom-in; 
-}
-
-
-.gallery-grid img:nth-child(3n + 1) {
-  grid-column: 1 / -1; 
-}
-
-.gallery-grid img:nth-child(3n + 2),
-.gallery-grid img:nth-child(3n + 3) {
-  height: 95vh; 
-} */
-
-/* --- Estilos para la Galería CORREGIDOS --- */
-
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
 }
 
-/* Hacemos que el enlace <a> ocupe todo el espacio de la celda del grid */
-.gallery-grid a {
-  display: block;
-  font-size: 0; /* Elimina un pequeño espacio extra que los enlaces a veces añaden */
-}
-
-/* Ajustamos los selectores :nth-child para que apunten al enlace <a> */
-.gallery-grid a:nth-child(3n + 1) {
-  grid-column: 1 / -1;
-  /* height: 600px;  (puedes poner la altura aquí si quieres) */
-}
-
-.gallery-grid a:nth-child(3n + 2),
-.gallery-grid a:nth-child(3n + 3) {
-  height: 95vh;
-}
-
-/* La imagen ahora es hija del enlace y debe llenar a su padre (el <a>) */
-.gallery-grid a img {
+.gallery-grid img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  cursor: zoom-in;
 }
+
+.gallery-grid img:nth-child(3n + 1) {
+  grid-column: 1 / -1;
+}
+
+.gallery-grid img:nth-child(3n + 2),
+.gallery-grid img:nth-child(3n + 3) {
+  height: 95vh;
+}
+
+/* --- Estilos para la Galería CORREGIDOS --- */
 
 /* Estilos para la sección de Trabajos Relacionados */
 .related-works-section {
