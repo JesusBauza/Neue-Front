@@ -359,24 +359,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       collaboratorsEl.appendChild(colabDiv);
     });
 
-    // ▼▼▼ MODIFICACIÓN PARA EL LIGHTBOX ▼▼▼
     galleryEl.innerHTML = "";
     project.Media.forEach((image) => {
-      // Se crea el enlace <a> que necesita SimpleLightbox
       const link = document.createElement("a");
       link.href = image.url;
-
-      // Se crea la imagen <img>
       const img = document.createElement("img");
       img.src = image.url;
       img.alt = image.alternativeText || project.Titulo;
-
-      // Se mete la imagen dentro del enlace
       link.appendChild(img);
-      // Y el enlace dentro de la galería
       galleryEl.appendChild(link);
     });
-    // ▲▲▲ FIN DE LA MODIFICACIÓN ▲▲▲
 
     // --- LLAMADA 2: OBTENER LOS TRABAJOS RELACIONADOS ---
     if (project.related_works && project.related_works.length > 0) {
@@ -416,18 +408,32 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
             </div>
         `;
+
+        // ▼▼▼ LÓGICA DEL ROLLING TEXT AÑADIDA ▼▼▼
         cardLink.addEventListener("mouseover", () => {
-          /* ...tu lógica de rolling text... */
+          const categoryContainer = cardLink.querySelector(
+            ".category-container"
+          );
+          if (categoryContainer) {
+            categoryContainer.classList.add("hovered");
+          }
         });
+
         cardLink.addEventListener("mouseout", () => {
-          /* ...tu lógica de rolling text... */
+          const categoryContainer = cardLink.querySelector(
+            ".category-container"
+          );
+          if (categoryContainer) {
+            categoryContainer.classList.remove("hovered");
+          }
         });
+        // ▲▲▲ FIN DE LA LÓGICA AÑADIDA ▲▲▲
+
         relatedWorksGrid.appendChild(cardLink);
       });
     }
 
-    // ▼▼▼ INICIALIZACIÓN DEL LIGHTBOX ▼▼▼
-    // Se ejecuta al final, después de que toda la galería ha sido creada.
+    // --- INICIALIZACIÓN DEL LIGHTBOX ---
     new SimpleLightbox(".gallery-grid a");
   } catch (error) {
     console.error("Error al cargar el proyecto:", error);
