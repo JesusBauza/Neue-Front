@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeBtn = document.querySelector(".close-btn");
   const mobileMenuLinks = document.querySelectorAll(".mobile-nav a");
 
+  if (mobileNav) {
+    mobileNav.classList.remove("is-active");
+  }
+  document.documentElement.classList.remove("no-scroll");
   // ▼▼▼ CÓDIGO AÑADIDO PARA EL ROLLING TEXT ▼▼▼
   // Selecciona todos los enlaces que necesitan el efecto en desktop y móvil.
   const rollingLinks = document.querySelectorAll(
