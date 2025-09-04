@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/nav.css" />
     <link rel="stylesheet" href="/css/proyecto.css" />
     <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simpleLightbox/2.14.2/simpleLightbox.min.css">
     <link rel="icon" href="https://res.cloudinary.com/dtkqz3wwo/image/upload/v1756931423/NeueIdea_Favicon_l0pcl0.svg" type="image/svg">
   </head>
   <body data-section-theme="light">
@@ -149,14 +150,22 @@
     </footer>
 
 
-    <div id="lightbox" class="lightbox">
-      <span class="lightbox-close">&times;</span>
-      <div id="lightbox-content-scroll" class="lightbox-content-scroll"></div>
-    </div>
+
 
     <script src="/js/proyecto.js" defer></script>
     <script src="/js/nav.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <script src="/js/scroll.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/simpleLightbox/2.14.2/simpleLightbox.min.js"></script>
+
+     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializa SimpleLightbox en todas las imágenes dentro de #project-gallery
+            var galleryImages = document.querySelectorAll('#project-gallery a'); // Selecciona los enlaces, no las imágenes directamente
+            if (galleryImages.length > 0) {
+                new SimpleLightbox(galleryImages); 
+            }
+        });
+    </script>
   </body>
 </html>

@@ -259,49 +259,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const relatedWorksGrid = document.getElementById("related-works-grid");
   const contentContainer =
     document.getElementById("project-content") || document.body;
-  const lightbox = document.getElementById("lightbox");
-  const lightboxContent = document.getElementById("lightbox-content-scroll");
-  const lightboxClose = document.querySelector(".lightbox-close");
-
-  // === Lógica del Lightbox de Galería Vertical ===
-  if (galleryEl && lightbox && lightboxContent && lightboxClose) {
-    galleryEl.addEventListener("click", (e) => {
-      if (e.target.tagName === "IMG") {
-        e.preventDefault();
-        const allGalleryImages = Array.from(galleryEl.querySelectorAll("img"));
-        const clickedIndex = allGalleryImages.indexOf(e.target);
-
-        lightboxContent.innerHTML = "";
-        allGalleryImages.forEach((imgNode) => {
-          const newImg = document.createElement("img");
-          newImg.src = imgNode.src;
-          lightboxContent.appendChild(newImg);
-        });
-
-        lightbox.style.display = "block";
-        document.body.classList.add("no-scroll");
-
-        const lightboxImages = lightboxContent.querySelectorAll("img");
-        if (lightboxImages[clickedIndex]) {
-          lightboxImages[clickedIndex].scrollIntoView({
-            behavior: "auto",
-            block: "start",
-          });
-        }
-      }
-    });
-
-    const closeLightbox = () => {
-      lightbox.style.display = "none";
-      document.body.classList.remove("no-scroll");
-    };
-    lightboxClose.addEventListener("click", closeLightbox);
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) {
-        closeLightbox();
-      }
-    });
-  }
 
   // ▼▼▼ AQUÍ ESTÁ LA MODIFICACIÓN ▼▼▼
   // === Lógica para Cargar Datos de Strapi desde la RUTA AMIGABLE ===
@@ -359,12 +316,30 @@ document.addEventListener("DOMContentLoaded", async () => {
       collaboratorsEl.appendChild(colabDiv);
     });
 
-    galleryEl.innerHTML = "";
+    /*  galleryEl.innerHTML = "";
     project.Media.forEach((image) => {
       const img = document.createElement("img");
       img.src = image.url;
       img.alt = image.alternativeText || project.Titulo;
       galleryEl.appendChild(img);
+    }); */
+
+    galleryEl.innerHTML = "";
+    project.Media.forEach((image) => {
+      // Creamos un enlace (<a>)
+      const link = document.createElement("a");
+      link.href = image.url; // El enlace apunta a la URL de la imagen
+      link.dataset.lightbox = "gallery"; // Opcional: Para agrupar todas las imágenes si quieres
+
+      // Creamos la imagen (<img>)
+      const img = document.createElement("img");
+      img.src = image.url;
+      img.alt = image.alternativeText || project.Titulo;
+
+      // Metemos la imagen dentro del enlace
+      link.appendChild(img);
+      // Y el enlace dentro de la galería
+      galleryEl.appendChild(link);
     });
 
     // --- LLAMADA 2: OBTENER LOS TRABAJOS RELACIONADOS (MODIFICADO) ---
