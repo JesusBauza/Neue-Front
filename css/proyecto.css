@@ -295,6 +295,10 @@ body {
   border-radius: 3px 0 0 3px;
 }
 
+.lightbox-custom .prev {
+  left: 0%;
+}
+
 .lightbox-custom .prev:hover,
 .lightbox-custom .next:hover {
   background-color: rgba(255, 255, 255, 0.1);
