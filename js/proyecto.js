@@ -258,8 +258,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("project-content") || document.body;
 
   // === Lógica para Cargar Datos de Strapi ===
-  const params = new URLSearchParams(window.location.search);
-  const projectUID = params.get("uid");
+  /* const params = new URLSearchParams(window.location.search);
+  const projectUID = params.get("uid"); */
+  const path = window.location.pathname; // ej: "/proyecto/eduardo-carvajal"
+  const pathParts = path.split("/"); // -> ["", "proyecto", "eduardo-carvajal"]
+  const projectUID = pathParts[pathParts.length - 1]; // -> "eduardo-carvajal"
 
   if (!projectUID) {
     contentContainer.innerHTML =
