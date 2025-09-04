@@ -257,12 +257,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   const contentContainer =
     document.getElementById("project-content") || document.body;
 
-  // === Lógica para Cargar Datos de Strapi ===
-  /* const params = new URLSearchParams(window.location.search);
-  const projectUID = params.get("uid"); */
-  const path = window.location.pathname; // ej: "/proyecto/eduardo-carvajal"
-  const pathParts = path.split("/"); // -> ["", "proyecto", "eduardo-carvajal"]
-  const projectUID = pathParts[pathParts.length - 1]; // -> "eduardo-carvajal"
+  // === Lógica para Cargar Datos de Strapi desde la RUTA AMIGABLE ===
+  const path = window.location.pathname;
+  const pathParts = path.split("/");
+  const projectUID = pathParts[pathParts.length - 1];
 
   if (!projectUID) {
     contentContainer.innerHTML =
@@ -270,7 +268,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // Funciones para procesar el Rich Text
+  // --- Definiciones de las funciones de Rich Text ---
   function renderRichTextToHtml(blocks) {
     if (!blocks) return "";
     let html = "";
@@ -298,7 +296,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     return html;
   }
-
   function renderTextChildren(children) {
     if (!children) return "";
     let text = "";
@@ -321,6 +318,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
+    // --- LLAMADA 1: OBTENER EL PROYECTO PRINCIPAL ---
     const projectApiUrl = `https://neue-backend-production.up.railway.app/api/proyectos?filters[Uid][$eq]=${projectUID}&populate=*`;
     const projectResponse = await fetch(projectApiUrl);
     if (!projectResponse.ok)
@@ -329,8 +327,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
 
     const projectData = await projectResponse.json();
-    if (projectData.data.length === 0)
-      throw new Error("Proyecto no encontrado con ese UID.");
+    if (projectData.data.length === 0) {
+      throw new Error(
+        "Proyecto no encontrado. Verifica que el UID sea correcto y que el proyecto esté en modo 'Published'."
+      );
+    }
 
     const project = projectData.data[0];
 
@@ -365,22 +366,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     galleryEl.innerHTML = "";
     project.Media.forEach((image) => {
-      // Se crea el enlace <a> que necesita SimpleLightbox
       const link = document.createElement("a");
       link.href = image.url;
 
-      // Se crea la imagen <img>
       const img = document.createElement("img");
       img.src = image.url;
       img.alt = image.alternativeText || project.Titulo;
 
-      // Se mete la imagen dentro del enlace
       link.appendChild(img);
-      // Y el enlace dentro de la galería
       galleryEl.appendChild(link);
     });
 
-    // --- RENDERIZAR TRABAJOS RELACIONADOS ---
+    // --- LLAMADA 2: OBTENER LOS TRABAJOS RELACIONADOS ---
     if (project.related_works && project.related_works.length > 0) {
       const relatedIds = project.related_works.map((work) => work.id);
       const idFilters = relatedIds
@@ -411,9 +408,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
-    // --- INICIALIZAR EL LIGHTBOX DESPUÉS DE CREAR TODO ---
-    // Se asegura de que todos los enlaces <a> de la galería ya existan en la página.
-    var lightbox = new SimpleLightbox(".gallery-grid a");
+    // --- INICIALIZAR EL LIGHTBOX DESPUÉS DE CREAR LA GALERÍA ---
+    // Esto se asegura de que todos los enlaces <a> de la galería ya existan.
+    new SimpleLightbox(".gallery-grid a");
   } catch (error) {
     console.error("Error al cargar el proyecto:", error);
     contentContainer.innerHTML = `<h1>Proyecto no encontrado</h1><p>${error.message}</p>`;
