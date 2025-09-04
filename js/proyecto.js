@@ -312,7 +312,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Inicializar SimpleLightbox después de cargar las imágenes
-    new SimpleLightbox("#project-gallery a", {
+    var lightbox = new SimpleLightbox("#project-gallery a", {
       captions: true,
       captionsData: "alt",
       captionDelay: 200,
