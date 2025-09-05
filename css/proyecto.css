@@ -359,6 +359,13 @@ body.no-scroll {
     object-fit: cover;
     margin-bottom: 0;
   }
+
+  .gallery-grid img:nth-child(3n + 2),
+  .gallery-grid img:nth-child(3n + 3) {
+    height: 27.3125rem;
+    align-self: stretch;
+    aspect-ratio: 68/83;
+  }
 }
 
 @media (max-width: 650px) {
