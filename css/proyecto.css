@@ -301,11 +301,6 @@ body {
   left: 0%;
 }
 
-.lightbox-custom .prev:hover,
-.lightbox-custom .next:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
 /* Evita el scroll del fondo cuando el lightbox está abierto */
 body.no-scroll {
   overflow: hidden;
