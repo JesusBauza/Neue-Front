@@ -185,7 +185,7 @@ body {
 
 .gallery-grid img:nth-child(3n + 2),
 .gallery-grid img:nth-child(3n + 3) {
-  height: 95vh;
+  height: 47.81rem;
   align-self: stretch;
   aspect-ratio: 232/255;
 }
