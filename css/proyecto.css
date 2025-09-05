@@ -186,6 +186,8 @@ body {
 .gallery-grid img:nth-child(3n + 2),
 .gallery-grid img:nth-child(3n + 3) {
   height: 95vh;
+  align-self: stretch;
+  aspect-ratio: 232/255;
 }
 
 /* --- Estilos para la Galería CORREGIDOS --- */
