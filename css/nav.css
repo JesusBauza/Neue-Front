@@ -41,6 +41,16 @@
   gap: 1.25rem;
   align-items: center;
 }
+
+.nav-item {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+nav a {
+  transform: translateY(0);
+  will-change: transform;
+}
+
 .nav-link {
   font-size: 0.8rem;
   font-style: normal;
