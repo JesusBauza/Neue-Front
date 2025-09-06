@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Esperamos a que la animación termine y luego vamos a la nueva página
       setTimeout(() => {
         window.location.href = href;
-      }, 5000); // Duración de la animación en CSS
+      }, 7000); // Duración de la animación en CSS
     });
   });
 
