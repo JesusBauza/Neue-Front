@@ -1,5 +1,5 @@
 function initializeAnimation() {
-  gsap.to(".nav-item a", {
+  gsap.to(".link a", {
     y: 0,
     duration: 1,
     stagger: 0.1,
@@ -19,8 +19,8 @@ function initializeAnimation() {
     });
   }
 
-  if (document.querySelector(".nav-item a")) {
-    const linksText = new SplitType(".nav-item a", { types: "words" });
+  if (document.querySelector(".link a")) {
+    const linksText = new SplitType(".link a", { types: "words" });
     gsap.set(linksText.words, { y: 400 });
     gsap.to(linksText.words, {
       y: 0,
