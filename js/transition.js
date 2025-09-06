@@ -1,66 +1,63 @@
-function initializeAnimation() {
-  gsap.to(".link a", {
-    y: 0,
-    duration: 1,
-    stagger: 0.1,
-    ease: "power4.out",
-    delay: 2,
-  });
-
+// Función para inicializar animaciones en la página cargada
+// (Como la animación de entrada de texto que hicimos antes. La dejamos aquí para el futuro).
+function initializePageAnimations() {
+  // Si estás en la página de un proyecto, podrías llamar a la animación de GSAP aquí.
+  // Por ahora, la dejamos vacía o con animaciones generales.
   if (document.querySelector(".hero h1")) {
     const heroText = new SplitType(".hero h1", { types: "chars" });
-    gsap.set(heroText.chars, { y: 400 });
-    gsap.to(heroText.chars, {
-      y: 0,
+    gsap.from(heroText.chars, {
+      y: 400,
       duration: 1,
       stagger: 0.075,
       ease: "power4.out",
-      delay: 2,
-    });
-  }
-
-  if (document.querySelector(".link a")) {
-    const linksText = new SplitType(".link a", { types: "words" });
-    gsap.set(linksText.words, { y: 400 });
-    gsap.to(linksText.words, {
-      y: 0,
-      duration: 1,
-      stagger: 0.075,
-      ease: "power4.out",
-      delay: 2,
+      delay: 0.5,
     });
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  initializeAnimation();
-});
+// Listener principal para las transiciones de página
+// Solo se ejecuta en navegadores que soportan la View Transitions API
+if (document.startViewTransition) {
+  window.addEventListener("DOMContentLoaded", () => {
+    initializePageAnimations(); // Anima la primera página que se carga
+  });
 
-if (navigation.addEventListener) {
-  navigation.addEventListener("navigate", (event) => {
-    if (!event.destination.url.includes(document.location.origin)) {
+  document.body.addEventListener("click", async (event) => {
+    const link = event.target.closest("a");
+
+    // Salir si no es un enlace o si es un enlace externo/ancla
+    if (
+      !link ||
+      link.target === "_blank" ||
+      link.href.includes("#") ||
+      link.protocol !== location.protocol ||
+      link.host !== location.host
+    ) {
       return;
     }
 
-    event.intercept({
-      handler: async () => {
-        const response = await fetch(event.destination.url);
-        const text = await response.text();
+    event.preventDefault(); // Prevenir la navegación por defecto
+    const destinationUrl = link.href;
 
-        const transition = document.startViewTransition(() => {
-          const body = text.match(/body[^>]*>([\s\S]*)<\/body>/i)[1];
-          document.body.innerHTML = body;
+    // Iniciar la transición
+    const transition = document.startViewTransition(async () => {
+      const response = await fetch(destinationUrl);
+      const text = await response.text();
 
-          const title = text.match(/<title[^>]*>(.*?)<\/title>/i)[1];
-          document.title = title;
-        });
+      // Usamos DOMParser para obtener el contenido del body y el title de la nueva página
+      const doc = new DOMParser().parseFromString(text, "text/html");
 
-        transition.ready.then(() => {
-          window.scrollTo(0, 0);
-          initializeAnimation();
-        });
-      },
-      scroll: "manual",
+      document.body.innerHTML = doc.body.innerHTML;
+      document.title = doc.title;
+
+      // Re-ejecutar scripts necesarios en la nueva página si es necesario
+      // (Por ahora, la recarga del DOM es suficiente para los scripts con 'defer')
+    });
+
+    // Cuando la transición esté lista, reiniciamos el scroll y las animaciones
+    transition.ready.then(() => {
+      window.scrollTo(0, 0);
+      initializePageAnimations(); // Anima los elementos de la nueva página
     });
   });
 }
