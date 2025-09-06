@@ -1,33 +1,38 @@
 /* js/transitions.js */
+
 document.addEventListener("DOMContentLoaded", () => {
   const transitionOverlay = document.querySelector(".page-transition-overlay");
+  const allLinks = document.querySelectorAll("a");
 
-  // --- Animación de ENTRADA a la página ---
-  // Inicia las animaciones de salida del overlay y entrada del contenido
-  // al cargar la página.
-  function pageLoad() {
-    // Añade la clase 'is-loaded' al body para que el texto se revele
-    document.body.classList.add("is-loaded");
-    // Añade la clase 'is-leaving' al overlay para que se deslice hacia fuera
+  // --- LÓGICA DE ENTRADA ---
+  // Se ejecuta en cuanto la nueva página empieza a cargarse.
+  function pageEntrance() {
     if (transitionOverlay) {
-      transitionOverlay.classList.add("is-leaving");
+      // Forzamos al slide a estar en la posición "activa" (cubriendo la pantalla)
+      // sin animación, para que la página nueva ya EMPIECE en blanco.
+      transitionOverlay.style.transition = "none";
+      transitionOverlay.classList.add("is-active");
+
+      // Usamos un pequeño timeout para asegurar que el navegador aplique el estilo
+      // anterior antes de ejecutar la animación de salida del slide.
+      setTimeout(() => {
+        transitionOverlay.style.transition = ""; // Reactivamos las transiciones
+        transitionOverlay.classList.add("is-leaving");
+        document.body.classList.add("is-loaded");
+      }, 50); // Un pequeño retraso es suficiente
     }
   }
 
-  // Espera a que todo el contenido (imágenes, etc.) esté cargado
-  // para una transición más suave.
-  window.addEventListener("load", pageLoad);
+  // Ejecutamos la animación de entrada
+  pageEntrance();
 
-  // --- Animación de SALIDA de la página ---
-  // Intercepta los clics en los enlaces para activar la transición
-  // antes de navegar a la nueva página.
-  const allLinks = document.querySelectorAll("a");
-
+  // --- LÓGICA DE SALIDA ---
+  // Se ejecuta cuando el usuario hace clic en un enlace.
   allLinks.forEach((link) => {
     link.addEventListener("click", function (event) {
       const href = this.getAttribute("href");
 
-      // Ignorar enlaces externos, anclas, o con target="_blank"
+      // Ignorar enlaces que no cambian de página
       if (
         !href ||
         href.startsWith("#") ||
@@ -37,28 +42,31 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Prevenir la navegación inmediata
-      event.preventDefault();
+      event.preventDefault(); // Detenemos la navegación
 
-      // Activar el overlay
+      // Activamos la animación del slide para que cubra la pantalla
       if (transitionOverlay) {
         transitionOverlay.classList.add("is-active");
       }
 
-      // Esperar a que la animación del overlay termine y luego navegar
+      // Esperamos a que la animación termine y luego vamos a la nueva página
       setTimeout(() => {
         window.location.href = href;
-      }, 900); // Un poco más que la duración de la transición en CSS
+      }, 5000); // Duración de la animación en CSS
     });
   });
 
-  // Solución para el botón "atrás" del navegador (pageshow event)
+  // Maneja el botón "atrás" del navegador para que las animaciones se repitan
   window.addEventListener("pageshow", function (event) {
-    // Si la página se carga desde el caché del navegador (bfcache)
-    if (event.persisted && transitionOverlay) {
-      // Forzamos la animación de salida del overlay de nuevo
-      transitionOverlay.classList.remove("is-active");
-      transitionOverlay.classList.add("is-leaving");
+    if (event.persisted) {
+      // Resetea el estado si la página se carga del caché
+      if (transitionOverlay) {
+        transitionOverlay.style.transition = "none";
+        transitionOverlay.classList.remove("is-active", "is-leaving");
+        document.body.classList.remove("is-loaded");
+        // Vuelve a ejecutar la animación de entrada
+        pageEntrance();
+      }
     }
   });
 });
