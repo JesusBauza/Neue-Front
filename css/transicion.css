@@ -1,0 +1,48 @@
+/* css/transitions.css */
+
+/* El slide blanco que cubre toda la página */
+.page-transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff; /* Color del slide */
+  z-index: 9999;
+  /* Empieza fuera de la pantalla (abajo) y se deslizará hacia arriba */
+  transform: translateY(100%);
+  transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+/* Estado cuando la transición de salida está activa */
+.page-transition-overlay.is-active {
+  transform: translateY(0%);
+}
+
+/* Estado cuando la página nueva ha cargado y el slide se va */
+.page-transition-overlay.is-leaving {
+  transform: translateY(-100%);
+}
+
+/* Contenedor que actúa como máscara para el texto */
+.reveal-container {
+  overflow: hidden;
+  /* Añadimos un pequeño padding para evitar que el texto se corte visualmente */
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+}
+
+/* El elemento de texto que se animará.
+   Empieza fuera de su contenedor (máscara). */
+.reveal-container > * {
+  transform: translateY(110%);
+  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+  /* Retraso para que la animación del texto comience después de que el slide se vaya */
+  transition-delay: 0.4s;
+}
+
+/* Cuando el cuerpo de la página tiene la clase 'is-loaded',
+   el texto se desliza a su posición original. */
+body.is-loaded .reveal-container > * {
+  transform: translateY(0);
+}
