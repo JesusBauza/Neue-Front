@@ -38,6 +38,15 @@
   animation: fade-in 0.5s ease-out 0.8s forwards;
 }
 
+@keyframes slide-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
