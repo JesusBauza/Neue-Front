@@ -1,58 +1,57 @@
-/* --- Estilos Base para la Transición --- */
-
-/* El contenido principal de la página */
-main {
-  /* Habilita la transición suave para la propiedad 'transform' */
-  transition: transform 0.6s cubic-bezier(0.87, 0, 0.13, 1);
-}
-
-/* La capa que ayuda a simular el deslizamiento entre páginas */
-.transition-layer {
+/* --- Capa de transición para la página que ENTRA --- */
+.page-transition-in {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background: #fff; /* Un color de fondo neutro, ajústalo al de tu sitio */
-  z-index: 9999;
+  background: #fff; /* Fondo blanco */
+  z-index: 10000;
 
-  /* Habilita la transición suave para la propiedad 'transform' */
-  transition: transform 0.6s cubic-bezier(0.87, 0, 0.13, 1);
+  /* Animación que la desliza hacia arriba y afuera */
+  animation: slide-up 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
-/* --- Estados de la Animación --- */
+@keyframes slide-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
 
-/* ESTADO 1: Al iniciar la carga de una página */
-body.is-loading main {
-  /* El contenido nuevo empieza 30px abajo y oculto */
-  transform: translateY(30px);
+/* --- Capa de transición para la página que SALE --- */
+.page-transition-out {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #fff; /* Fondo blanco */
+  z-index: 10000;
+
+  /* Empieza oculta abajo del todo */
+  transform: translateY(100%);
+
+  /* Transición para cuando se mueva */
+  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* --- Contenedor del contenido principal de la página --- */
+.content-wrapper {
+  /* El contenido empieza invisible */
   opacity: 0;
-}
-body.is-loading .transition-layer {
-  /* La capa empieza cubriendo la pantalla */
-  transform: translateY(0);
+
+  /* Animación para que aparezca con un fade-in */
+  animation: fade-in 0.5s ease-out 0.8s forwards;
 }
 
-/* ESTADO 2: Cuando la página ya está visible y activa */
-main {
-  /* El contenido está en su posición normal */
-  transform: translateY(0);
-  opacity: 1;
-  transition-property: transform, opacity; /* Animamos ambas propiedades */
-  transition-duration: 0.6s;
-}
-.transition-layer {
-  /* La capa está oculta arriba */
-  transform: translateY(-100%);
-}
-
-/* ESTADO 3: Al hacer clic en un enlace para salir de la página */
-body.is-exiting main {
-  /* El contenido actual se desliza hacia arriba para salir */
-  transform: translateY(-30px);
-  opacity: 0;
-}
-body.is-exiting .transition-layer {
-  /* La capa vuelve a cubrir la pantalla para ocultar el cambio */
-  transform: translateY(0);
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
