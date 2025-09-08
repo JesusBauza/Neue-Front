@@ -32,10 +32,10 @@
 /* --- Contenedor del contenido principal de la página --- */
 .content-wrapper {
   /* El contenido empieza invisible */
-  opacity: 0;
+  opacity: 1;
 
   /* Animación para que aparezca con un fade-in */
-  animation: fade-in 0.5s ease-out 0.8s forwards;
+  /* animation: fade-in 0.5s ease-out 0.8s forwards; */
 }
 
 @keyframes slide-up {
