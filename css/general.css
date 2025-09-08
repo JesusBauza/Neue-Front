@@ -55,6 +55,22 @@ html {
   text-rendering: geometricPrecision;
 }
 
+/* --- Estilos para animaciones de entrada de texto y elementos --- */
+
+/* Hace que las letras/palabras/líneas de SplitType empiecen invisibles y con un pequeño desplazamiento */
+.split-type-char,
+.split-type-word,
+.split-type-line {
+  opacity: 0;
+  transform: translateY(20px); /* Un pequeño desplazamiento inicial */
+}
+
+/* Hace que las tarjetas o elementos que van a aparecer de forma escalonada empiecen invisibles */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
 @media (max-width: 1000px) {
   html {
     font-size: 14px;

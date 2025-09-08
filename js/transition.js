@@ -1,36 +1,83 @@
+// --- Función que activa las animaciones de texto y tarjetas ---
+function animatePageContent() {
+  // Animar TEXTO con SplitType y GSAP
+  // Selecciona todos los elementos de texto comunes que quieres animar.
+  // Ajusta estos selectores según la estructura de tus h1, p, etc.
+  const textElements = document.querySelectorAll("h1, h2, h3, p, span, li");
+
+  textElements.forEach((el) => {
+    // Si el elemento ya tiene contenido dinámico (como el body de proyecto.js)
+    // o es parte de un componente que ya anima, puedes añadir exclusiones.
+    if (el.classList.contains("no-split-animation")) return;
+
+    // Dividimos el texto en palabras
+    const splitText = new SplitType(el, { types: "words, chars" });
+
+    gsap.fromTo(
+      splitText.words,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.05, // Retraso escalonado entre palabras
+        delay: 0.2, // Pequeño retraso antes de que empiece la animación de texto
+      }
+    );
+  });
+
+  // Animar TARJETAS DE PROYECTO (Staggered Grid)
+  // Asegúrate de que los elementos que quieres animar tengan la clase 'stagger-item'
+  const staggerItems = document.querySelectorAll(".stagger-item");
+  if (staggerItems.length > 0) {
+    gsap.fromTo(
+      staggerItems,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.1, // Retraso escalonado entre cada tarjeta
+        delay: 0.4, // Retraso antes de que empiece la animación de tarjetas
+      }
+    );
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-  // --- LÓGICA DE ENTRADA (Esta parte no cambia) ---
+  // --- LÓGICA DE ENTRADA (Esta parte ahora dispara las animaciones de contenido) ---
   const transitionIn = document.querySelector(".page-transition-in");
   if (transitionIn) {
     setTimeout(() => {
       transitionIn.style.display = "none";
+      // ¡Ahora, después de que la capa se oculta, activamos las animaciones!
+      animatePageContent();
     }, 1000);
+  } else {
+    // Si no hay capa de entrada (ej. carga directa a la página, no desde un enlace),
+    // también disparamos las animaciones.
+    animatePageContent();
   }
 
-  // --- LÓGICA DE SALIDA (Ahora es más inteligente) ---
-
-  // En lugar de buscar cada enlace, escuchamos clics en todo el documento.
+  // --- LÓGICA DE SALIDA (Esta parte no cambia) ---
   document.body.addEventListener("click", function (e) {
-    // Verificamos si el elemento clickeado es (o está dentro de) un enlace.
     const link = e.target.closest("a");
-
-    // Si no se hizo clic en un enlace, no hacemos nada.
     if (!link) return;
 
     const href = link.getAttribute("href");
-
-    // Verificamos si es un enlace válido para la transición.
     const isInternalLink =
       href &&
+      !href.startsWith("http") &&
       !href.startsWith("#") &&
       !href.startsWith("mailto:") &&
       !href.startsWith("tel:") &&
       link.target !== "_blank";
 
     if (isInternalLink) {
-      e.preventDefault(); // Prevenimos la navegación.
+      e.preventDefault();
 
-      // Creamos y activamos la animación de salida.
       const transitionOut = document.createElement("div");
       transitionOut.className = "page-transition-out";
       document.body.appendChild(transitionOut);
@@ -39,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
         transitionOut.style.transform = "translateY(0)";
       }, 10);
 
-      // Navegamos después de que la animación termine.
       setTimeout(() => {
         window.location.href = href;
       }, 800);

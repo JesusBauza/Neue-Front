@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const cardLink = document.createElement("a");
     cardLink.href = `/project/${uid}`;
-    cardLink.className = "project-card";
+    cardLink.className = "project-card stagger-item";
 
     // Estructura HTML que incluye el parallax y el rolling text
     cardLink.innerHTML = `
