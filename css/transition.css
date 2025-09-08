@@ -1,0 +1,41 @@
+/* --- Animación de Salida para la Página Actual --- */
+@keyframes page-exit {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    /* Mueve la página hacia arriba y la desvanece, como en el video */
+    transform: translateY(-35px);
+    opacity: 0.7;
+  }
+}
+
+/* Esta clase se aplicará al contenedor principal para activar la animación de salida */
+main.is-exiting {
+  animation: page-exit 0.5s forwards ease-out;
+}
+
+/* --- Overlay de Transición para la Página Entrante --- */
+.transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #111; /* Color de la transición */
+  z-index: 10000;
+
+  /* La magia está en el clip-path: controla qué parte del overlay es visible */
+  /* Comienza cubriendo toda la pantalla */
+  clip-path: inset(0% 0 0 0);
+
+  /* La animación se define aquí */
+  transition: clip-path 0.7s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+/* Esta clase se añade para REVELAR la nueva página */
+.transition-overlay.is-revealing {
+  /* El overlay se "recoge" hacia arriba, revelando el contenido de abajo */
+  clip-path: inset(100% 0 0 0);
+}
