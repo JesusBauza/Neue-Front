@@ -1,42 +1,45 @@
-/* --- Keyframes Fieles al Video --- */
-
-/* 1. Animación de SALIDA para la página vieja */
-@keyframes move-out {
-  from {
-    transform: translateY(0);
-    opacity: 1;
-  }
+/* --- Animación de SALIDA para el contenido principal --- */
+@keyframes page-out {
   to {
-    /* La página se desliza hacia arriba y se desvanece ligeramente */
-    transform: translateY(-40px);
-    opacity: 0;
+    transform: translateY(-40px); /* Desliza hacia arriba */
+    opacity: 0; /* Se desvanece */
   }
 }
 
-/* 2. Animación de ENTRADA para la página nueva */
+/* --- Animación de ENTRADA/REVELADO para la capa de transición --- */
 @keyframes reveal-in {
   from {
-    /* La máscara oculta completamente el nuevo contenido */
-    clip-path: inset(100% 0 0 0);
+    clip-path: inset(0 0 0 0); /* La capa cubre toda la pantalla */
   }
   to {
-    /* La máscara se expande para revelar el nuevo contenido de abajo hacia arriba */
-    clip-path: inset(0% 0 0 0);
+    clip-path: inset(
+      100% 0 0 0
+    ); /* La capa se "recoge" hacia arriba, revelando el contenido */
   }
 }
 
-/* --- Aplicación de animaciones con la View Transitions API --- */
-
-/* Estilos para la imagen "vieja" (la captura de la página que desaparece) */
-::view-transition-old(root) {
-  animation: move-out 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+/* --- Contenedor Principal --- */
+/* Esta clase se añade con JS para activar la animación de salida */
+main.page-exit-animation {
+  animation: page-out 0.5s forwards ease-in-out;
 }
 
-/* Estilos para la imagen "nueva" (la captura de la página que aparece) */
-::view-transition-new(root) {
-  /* Usamos 'animation-delay' para que la animación de entrada comience
-     un poco después de que la de salida haya empezado. */
-  animation: reveal-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  /* La animación de entrada no se mezcla, aparece por encima */
-  mix-blend-mode: normal;
+/* --- Capa de Transición (Overlay) --- */
+.transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+  background-color: #111; /* Color de la transición */
+
+  /* Por defecto, la capa está presente y cubre la pantalla */
+  transform: translateY(0);
+}
+
+/* Esta clase se añade con JS en la página NUEVA para revelar el contenido */
+.transition-overlay.reveal {
+  /* Inicia la animación de revelado */
+  animation: reveal-in 0.7s forwards cubic-bezier(0.87, 0, 0.13, 1);
 }
