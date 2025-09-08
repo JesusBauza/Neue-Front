@@ -266,6 +266,7 @@ window.addEventListener("scroll", function () {
 });
  */
 
+// Espera el evento personalizado 'pageReady' de transition.js
 document.addEventListener("pageReady", loadProjectContent);
 
 async function loadProjectContent() {
@@ -286,20 +287,18 @@ async function loadProjectContent() {
   const prevArrow = document.querySelector(".lightbox-custom .prev");
   const nextArrow = document.querySelector(".lightbox-custom .next");
 
-  // ▼▼▼ AQUÍ ESTÁ LA MODIFICACIÓN ▼▼▼
-  // === Lógica para Cargar Datos de Strapi desde la RUTA AMIGABLE ===
-  const path = window.location.pathname; // ej: "/proyecto/eduardo-carvajal"
-  const pathParts = path.split("/"); // -> ["", "proyecto", "eduardo-carvajal"]
-  const projectUID = pathParts[pathParts.length - 1]; // -> "eduardo-carvajal"
+  const path = window.location.pathname;
+  const pathParts = path.split("/");
+  const projectUID = pathParts[pathParts.length - 1];
 
-  let galleryImages = []; // Array para guardar las URLs de las imágenes
+  let galleryImages = [];
   let currentImageIndex = 0;
 
   function openLightbox(index) {
     if (!lightbox) return;
     currentImageIndex = index;
     lightboxImg.src = galleryImages[currentImageIndex];
-    lightbox.style.display = "flex"; // Usamos flex para centrar
+    lightbox.style.display = "flex";
     document.body.classList.add("no-scroll");
   }
 
@@ -334,7 +333,6 @@ async function loadProjectContent() {
     prevArrow.addEventListener("click", showPrevImage);
     nextArrow.addEventListener("click", showNextImage);
 
-    // Opcional: Cerrar al hacer clic en el fondo oscuro
     lightbox.addEventListener("click", (e) => {
       if (e.target === lightbox) {
         closeLightbox();
@@ -364,7 +362,6 @@ async function loadProjectContent() {
 
     document.title = `${project.Titulo} | Neue Idea`;
 
-    // --- RENDERIZAR DATOS PRINCIPALES ---
     titleEl.textContent = project.Titulo;
     const servicesListItems = project.servicios
       .map((service) => `<li>${service.Nombre}</li>`)
@@ -401,7 +398,6 @@ async function loadProjectContent() {
       galleryImages.push(image.url);
     });
 
-    // --- LLAMADA 2: OBTENER LOS TRABAJOS RELACIONADOS (MODIFICADO) ---
     if (project.related_works && project.related_works.length > 0) {
       const relatedIds = project.related_works.map((work) => work.id);
       const idFilters = relatedIds
@@ -419,8 +415,8 @@ async function loadProjectContent() {
       relatedWorksGrid.innerHTML = "";
       relatedData.data.forEach((relatedWork) => {
         const cardLink = document.createElement("a");
-        cardLink.href = `/proyecto/${relatedWork.Uid}`; // Apunta a la URL amigable
-        cardLink.className = "related-card"; // Mantén la clase actual
+        cardLink.href = `/proyecto/${relatedWork.Uid}`;
+        cardLink.className = "related-card";
         const imageUrl = relatedWork.Home_Cover
           ? relatedWork.Home_Cover.url
           : "";
@@ -429,7 +425,6 @@ async function loadProjectContent() {
           ? relatedWork.categoria.Nombre
           : "";
 
-        // ▼▼▼ MODIFICACIÓN PARA EL ROLLING TEXT ▼▼▼
         cardLink.innerHTML = `
             <img src="${imageUrl}" alt="${title}">
             <div class="related-card-info">
@@ -441,7 +436,6 @@ async function loadProjectContent() {
             </div>
         `;
 
-        // Añadir listeners para el efecto hover
         cardLink.addEventListener("mouseover", () => {
           const categoryContainer = cardLink.querySelector(
             ".category-container"
@@ -459,7 +453,6 @@ async function loadProjectContent() {
             categoryContainer.classList.remove("hovered");
           }
         });
-        // ▲▲▲ FIN DE LA MODIFICACIÓN ▲▲▲
 
         relatedWorksGrid.appendChild(cardLink);
       });
@@ -469,7 +462,8 @@ async function loadProjectContent() {
     contentContainer.innerHTML = `<h1>Proyecto no encontrado</h1><p>${error.message}</p>`;
   }
 
-  // --- Definiciones de las funciones de Rich Text ---
+  // --- ¡CORRECCIÓN AQUÍ! ---
+  // Estas funciones ahora están DENTRO de loadProjectContent
   function renderRichTextToHtml(blocks) {
     if (!blocks) return "";
     let html = "";
@@ -497,6 +491,7 @@ async function loadProjectContent() {
     });
     return html;
   }
+
   function renderTextChildren(children) {
     if (!children) return "";
     let text = "";
@@ -517,4 +512,4 @@ async function loadProjectContent() {
     });
     return text;
   }
-}
+} // <-- El corchete de cierre de loadProjectContent está aquí
