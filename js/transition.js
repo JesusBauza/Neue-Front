@@ -1,47 +1,40 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // --- LÓGICA DE ENTRADA ---
-  // Cuando la página carga, buscamos la capa de entrada.
-  const transitionIn = document.querySelector(".page-transition-in");
-  if (transitionIn) {
-    // Después de 1 segundo (la duración de la animación + un margen),
-    // la ocultamos para que no interfiera con la página.
-    setTimeout(function () {
-      transitionIn.style.display = "none";
-    }, 1000);
-  }
+  const body = document.body;
+  const layer = document.createElement("div");
+  layer.className = "transition-layer";
+  body.prepend(layer);
 
-  // --- LÓGICA DE SALIDA (AUTOMATIZADA) ---
+  body.classList.add("is-loading");
+
+  window.onload = function () {
+    body.classList.remove("is-loading");
+
+    // After the transition time, fire a custom event
+    setTimeout(() => {
+      const event = new CustomEvent("pageReady");
+      document.dispatchEvent(event);
+    }, 600); // This must match the CSS transition duration
+  };
+
   const allLinks = document.querySelectorAll("a");
-
   allLinks.forEach((link) => {
     const href = link.getAttribute("href");
+    const target = link.getAttribute("target");
 
-    // Verificamos que sea un enlace interno y no especial (mailto, tel, etc.)
     if (
       href &&
       !href.startsWith("#") &&
       !href.startsWith("mailto:") &&
       !href.startsWith("tel:") &&
-      link.target !== "_blank"
+      target !== "_blank" &&
+      new URL(href, window.location.origin).origin === window.location.origin
     ) {
       link.addEventListener("click", function (e) {
-        e.preventDefault(); // Prevenimos la navegación inmediata.
-
-        // Creamos la capa de transición de salida dinámicamente.
-        const transitionOut = document.createElement("div");
-        transitionOut.className = "page-transition-out";
-        document.body.appendChild(transitionOut);
-
-        // Forzamos un pequeño retraso para que el navegador aplique el estilo inicial.
-        setTimeout(() => {
-          // Movemos la capa a su posición final (cubriendo la pantalla).
-          transitionOut.style.transform = "translateY(0)";
-        }, 10);
-
-        // Esperamos a que la animación termine para navegar a la nueva página.
+        e.preventDefault();
+        body.classList.add("is-exiting");
         setTimeout(() => {
           window.location.href = href;
-        }, 800); // Coincide con la duración de la transición en el CSS.
+        }, 600);
       });
     }
   });
