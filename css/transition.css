@@ -13,7 +13,7 @@ main {
   left: 0;
   width: 100%;
   height: 100vh;
-  background: #f0f0f0; /* Un color de fondo neutro, ajústalo al de tu sitio */
+  background: #fff; /* Un color de fondo neutro, ajústalo al de tu sitio */
   z-index: 9999;
 
   /* Habilita la transición suave para la propiedad 'transform' */
