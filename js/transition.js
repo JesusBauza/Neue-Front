@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
       transitionIn.style.display = "none";
       // ¡Ahora, después de que la capa se oculta, activamos las animaciones!
       animatePageContent();
-    }, 1000);
+    }, 1300);
   } else {
     // Si no hay capa de entrada (ej. carga directa a la página, no desde un enlace),
     // también disparamos las animaciones.
