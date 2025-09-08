@@ -29,15 +29,6 @@
   transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* --- Contenedor del contenido principal de la página --- */
-.content-wrapper {
-  /* El contenido empieza invisible */
-  opacity: 1;
-
-  /* Animación para que aparezca con un fade-in */
-  /* animation: fade-in 0.5s ease-out 0.8s forwards; */
-}
-
 @keyframes slide-up {
   from {
     transform: translateY(0);
@@ -46,13 +37,3 @@
     transform: translateY(-100%);
   }
 }
-
-/* @keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
- */

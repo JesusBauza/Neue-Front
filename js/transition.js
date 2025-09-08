@@ -1,6 +1,13 @@
 // --- Función que activa las animaciones de texto y tarjetas ---
 function animatePageContent() {
   if (document.body.classList.contains("no-content-animation")) return;
+
+  const wrapper = document.querySelector(".content-wrapper");
+  if (wrapper) {
+    // Hacemos visible el contenedor principal AHORA.
+    // GSAP se encargará de animar a los hijos que están dentro.
+    wrapper.style.opacity = "1";
+  }
   // Animar TEXTO con SplitType y GSAP
   // Selecciona todos los elementos de texto comunes que quieres animar.
   // Ajusta estos selectores según la estructura de tus h1, p, etc.
