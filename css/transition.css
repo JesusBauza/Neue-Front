@@ -9,17 +9,17 @@
   z-index: 10000;
 
   /* Animación que la desliza hacia arriba y afuera */
-  animation: slide-up 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation: move-in 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
-@keyframes slide-up {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-100%);
-  }
-}
+/* @keyframes slide-up {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+    } */
 
 /* --- Capa de transición para la página que SALE --- */
 .page-transition-out {
@@ -44,14 +44,16 @@
   opacity: 0;
 
   /* Animación para que aparezca con un fade-in */
-  animation: fade-in 0.5s ease-out 0.8s forwards;
+  animation: move-in 0.5s ease-out 0.8s forwards;
 }
 
-@keyframes fade-in {
+@keyframes move-in {
   from {
     opacity: 0;
+    transform: translateY(0);
   }
   to {
     opacity: 1;
+    transform: translateY(-100%);
   }
 }
