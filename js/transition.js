@@ -1,48 +1,43 @@
 document.addEventListener("DOMContentLoaded", function () {
   // --- LÓGICA DE ENTRADA ---
-  // Esta parte se encarga de la animación cuando llegas a una página nueva.
+  // Se asegura de que la capa blanca de entrada se oculte después de la animación.
   const transitionIn = document.querySelector(".page-transition-in");
   if (transitionIn) {
-    // Después de que la animación de 0.8s termina, ocultamos la capa
-    // para que no interfiera con los clics en la página.
-    setTimeout(function () {
+    setTimeout(() => {
       transitionIn.style.display = "none";
-    }, 1000); // 1 segundo para dar un pequeño margen.
+    }, 1000); // Oculta la capa después de 1s para no bloquear clics.
   }
 
   // --- LÓGICA DE SALIDA ---
-  // Esta parte se encarga de la animación cuando haces clic en un enlace para irte.
+  // Intercepta los clics en todos los enlaces internos.
   const allLinks = document.querySelectorAll("a");
-
   allLinks.forEach((link) => {
     const href = link.getAttribute("href");
-
-    // Nos aseguramos de que sea un enlace interno y no uno especial (mailto, #, etc.)
-    if (
+    const isInternalLink =
       href &&
       !href.startsWith("#") &&
       !href.startsWith("mailto:") &&
       !href.startsWith("tel:") &&
-      link.target !== "_blank"
-    ) {
-      link.addEventListener("click", function (e) {
-        e.preventDefault(); // Detenemos la navegación inmediata.
+      link.target !== "_blank";
 
-        // 1. Creamos la capa blanca de salida dinámicamente.
+    if (isInternalLink) {
+      link.addEventListener("click", function (event) {
+        event.preventDefault(); // Previene la navegación instantánea.
+
+        // Crea la capa blanca de salida.
         const transitionOut = document.createElement("div");
         transitionOut.className = "page-transition-out";
         document.body.appendChild(transitionOut);
 
-        // 2. Un pequeño retraso para que el navegador la dibuje antes de animarla.
+        // Activa la animación para que la capa cubra la pantalla.
         setTimeout(() => {
-          // 3. Activamos la animación para que suba y cubra la pantalla.
           transitionOut.style.transform = "translateY(0)";
         }, 10);
 
-        // 4. Esperamos a que la animación termine para cambiar de página.
+        // Espera a que la animación termine antes de cambiar de página.
         setTimeout(() => {
           window.location.href = href;
-        }, 800); // Esta duración coincide con la del CSS.
+        }, 800); // Esta duración coincide con tu CSS.
       });
     }
   });
