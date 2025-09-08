@@ -55,6 +55,7 @@ function animatePageContent() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  if (document.body.classList.contains("no-page-transition")) return;
   // --- LÓGICA DE ENTRADA (Esta parte ahora dispara las animaciones de contenido) ---
   const transitionIn = document.querySelector(".page-transition-in");
   if (transitionIn) {
