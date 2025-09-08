@@ -1,41 +1,42 @@
-/* --- Animación de Salida para la Página Actual --- */
-@keyframes page-exit {
-  0% {
+/* --- Keyframes Fieles al Video --- */
+
+/* 1. Animación de SALIDA para la página vieja */
+@keyframes move-out {
+  from {
     transform: translateY(0);
     opacity: 1;
   }
-  100% {
-    /* Mueve la página hacia arriba y la desvanece, como en el video */
-    transform: translateY(-35px);
-    opacity: 0.7;
+  to {
+    /* La página se desliza hacia arriba y se desvanece ligeramente */
+    transform: translateY(-40px);
+    opacity: 0;
   }
 }
 
-/* Esta clase se aplicará al contenedor principal para activar la animación de salida */
-main.is-exiting {
-  animation: page-exit 0.5s forwards ease-out;
+/* 2. Animación de ENTRADA para la página nueva */
+@keyframes reveal-in {
+  from {
+    /* La máscara oculta completamente el nuevo contenido */
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    /* La máscara se expande para revelar el nuevo contenido de abajo hacia arriba */
+    clip-path: inset(0% 0 0 0);
+  }
 }
 
-/* --- Overlay de Transición para la Página Entrante --- */
-.transition-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: #111; /* Color de la transición */
-  z-index: 10000;
+/* --- Aplicación de animaciones con la View Transitions API --- */
 
-  /* La magia está en el clip-path: controla qué parte del overlay es visible */
-  /* Comienza cubriendo toda la pantalla */
-  clip-path: inset(0% 0 0 0);
-
-  /* La animación se define aquí */
-  transition: clip-path 0.7s cubic-bezier(0.87, 0, 0.13, 1);
+/* Estilos para la imagen "vieja" (la captura de la página que desaparece) */
+::view-transition-old(root) {
+  animation: move-out 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-/* Esta clase se añade para REVELAR la nueva página */
-.transition-overlay.is-revealing {
-  /* El overlay se "recoge" hacia arriba, revelando el contenido de abajo */
-  clip-path: inset(100% 0 0 0);
+/* Estilos para la imagen "nueva" (la captura de la página que aparece) */
+::view-transition-new(root) {
+  /* Usamos 'animation-delay' para que la animación de entrada comience
+     un poco después de que la de salida haya empezado. */
+  animation: reveal-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  /* La animación de entrada no se mezcla, aparece por encima */
+  mix-blend-mode: normal;
 }

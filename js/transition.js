@@ -1,49 +1,68 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // --- 1. Configuración del Overlay ---
-  // Crea el elemento overlay que revelará la nueva página
-  const overlay = document.createElement("div");
-  overlay.className = "transition-overlay";
-  document.body.appendChild(overlay);
+  // --- Interceptor de Clics ---
+  // Escucha todos los clics en el documento.
+  window.addEventListener("click", (event) => {
+    // Busca el enlace <a> más cercano al elemento clickeado.
+    const link = event.target.closest("a");
 
-  // --- 2. Animación de Entrada de Página ---
-  // Al cargar una nueva página, el overlay está cubriendo todo.
-  // Le damos un pequeño respiro al navegador y luego añadimos la clase
-  // para que se anime y revele el contenido.
-  setTimeout(() => {
-    overlay.classList.add("is-revealing");
-  }, 100); // 100ms de retraso para asegurar que el renderizado inicial haya ocurrido
-
-  // --- 3. Animación de Salida de Página ---
-  // Selecciona el contenedor principal que animaremos al salir
-  const mainContainer = document.querySelector("main");
-  const allLinks = document.querySelectorAll("a");
-
-  allLinks.forEach((link) => {
-    const href = link.getAttribute("href");
-    const target = link.getAttribute("target");
-
-    // Aplicamos la transición solo a enlaces internos que no abren en una nueva pestaña
+    // Si no es un enlace válido o es para una nueva pestaña, no hacemos nada.
     if (
-      href &&
-      !href.startsWith("#") &&
-      !href.startsWith("mailto:") &&
-      !href.startsWith("tel:") &&
-      target !== "_blank"
-    ) {
-      link.addEventListener("click", function (event) {
-        // Prevenimos la navegación inmediata
-        event.preventDefault();
+      !link ||
+      link.target === "_blank" ||
+      link.getAttribute("href")?.startsWith("#")
+    )
+      return;
 
-        // Si hay un contenedor principal, le aplicamos la animación de salida
-        if (mainContainer) {
-          mainContainer.classList.add("is-exiting");
-        }
+    const currentUrl = new URL(window.location);
+    const targetUrl = new URL(link.href);
 
-        // Esperamos a que la animación de salida termine para navegar
-        setTimeout(() => {
-          window.location = href;
-        }, 500); // Esta duración DEBE coincidir con la duración de la animación 'page-exit'
-      });
-    }
+    // Si el enlace apunta a un dominio diferente, dejamos que el navegador lo maneje.
+    if (currentUrl.origin !== targetUrl.origin) return;
+
+    // Prevenimos la navegación por defecto del navegador.
+    event.preventDefault();
+
+    // Iniciamos la transición.
+    navigate(link.href);
   });
+
+  /**
+   * --- Función de Navegación con View Transitions API ---
+   * @param {string} url - La URL de la página a la que queremos navegar.
+   */
+  function navigate(url) {
+    // 1. Inicia la transición. El navegador toma una "foto" del estado actual.
+    // Esta función devuelve un objeto (transition) con promesas.
+    const transition = document.startViewTransition(async () => {
+      try {
+        // 2. Cargamos el contenido de la nueva página.
+        const response = await fetch(url);
+        const text = await response.text();
+
+        // 3. Usamos DOMParser para convertir el texto HTML en un documento manipulable.
+        // Esto es mucho más eficiente que usar innerHTML en un div temporal.
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, "text/html");
+
+        // 4. Reemplazamos el contenido del body y el título de la página actual
+        // con el contenido de la página nueva.
+        document.body.innerHTML = doc.body.innerHTML;
+        document.title = doc.title;
+
+        // Opcional: Re-ejecutar scripts si es necesario.
+        // Por la estructura de tus scripts (defer), el navegador debería
+        // ejecutar los nuevos scripts del body recién insertado.
+      } catch (error) {
+        console.error("Error al cargar la página:", error);
+        // Si falla, navegamos de la forma tradicional.
+        window.location.href = url;
+      }
+    });
+
+    // La View Transitions API está diseñada para manejar todo, pero si necesitas
+    // hacer algo cuando la transición termine, puedes usar la promesa `finished`.
+    transition.finished.then(() => {
+      // console.log("Transición completada!");
+    });
+  }
 });
