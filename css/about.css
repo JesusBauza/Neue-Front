@@ -3,9 +3,12 @@ body {
   padding: 1.5rem 1.5rem 1.63rem 1.5rem;
   display: flex; /* Activa Flexbox */
   flex-direction: column; /* Apila los elementos verticalmente */
-  min-height: 100vh; /* Altura mínima de toda la ventana del navegador */
 }
-
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 .about {
   flex-grow: 1;
 }
